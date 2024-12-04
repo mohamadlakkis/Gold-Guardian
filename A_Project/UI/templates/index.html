@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Assistant</title>
+</head>
+<body>
+    <h1>Gold Assistant</h1>
+    <form method="POST" action="/">
+        <label for="query">Ask a Question:</label><br>
+        <input type="text" id="query" name="query" placeholder="e.g., How can I invest in Gold?" required>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Image and Prompt Query</h2>
+      <form method="POST" action="/image-query" enctype="multipart/form-data">
+      <label for="prompt">Enter a Prompt:</label><br>
+      <input type="text" id="prompt" name="prompt" placeholder="Describe the image or ask a question" required><br>
+      <label for="image">Upload an Image:</label><br>
+      <input type="file" id="image" name="image" accept="image/*" required><br>
+      <button type="submit">Submit</button>
+      </form>
+
+
+    {% if query %}
+        <h2>Your Query:</h2>
+        <p>{{ query }}</p>
+
+        <h2>Retrieved Documents:</h2>
+        <ul>
+            {% for doc in documents %}
+                <li>{{ doc }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Answer:</h2>
+        <p>{{ answer }}</p>
+    {% endif %}
+
+    {% if error %}
+        <h3 style="color: red;">{{ error }}</h3>
+    {% endif %}
+    {% if image_prompt %}
+    <h2>Image Prompt:</h2>
+    <p>{{ image_prompt }}</p>
+
+    <h2>Retrieved Documents:</h2>
+    <ul>
+        {% for doc in documents %}
+            <li>{{ doc }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Answer:</h2>
+    <p>{{ answer }}</p>
+{% endif %}
+
+</body>
+</html>

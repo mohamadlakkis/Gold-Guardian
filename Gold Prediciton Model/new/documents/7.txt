@@ -1,0 +1,235 @@
+Bullish bets on the yen continue to gain traction: COT report 
+We may have seen an important swing low on the yen looking at the change of speculative market positioning. And that could see a much deeper pullback on USD/JPY.
+Market positioning from the COT report – Tuesday, 26 November 2024:
+
+    Large speculators decreased their net-short exposure to JPY futures for the first week in eight, by 18k contracts (15.9k longs were added, -3.1k shorts were closed)
+    They increased long exposure to EUR/USD futures by 17.6% (29,422 contracts) and reduced shorts by -3.6% (-5.7k contracts)
+    Net-short exposure to CHF futures rose to a 17-week high among large speculators
+    While large speculators pushed net-long exposure to AUD/USD futures to a near 7-year high, asset managers increased their net-short exposure by 5.9k contracts
+    Large speculators were their most bearish on NZD futures in 12 months heading into the RBNZ meeting, with a net-short exposure of -18.5k contracts
+    Net-short exposure against CAD futures decreased for the first week in seven, although by a mere –434 contracts
+    Short exposure to WTI crude oil futures declined by -7.8% (-1.7k contracts)
+    They also reduced short exposure to gold by -6% (-4.8k contracts) and silver futures by -7.9% (-1.7k contracts)
+
+
+0. Title of Graph
+
+    Large-Speculative Positioning (As % of Open Interest)
+
+1. Trend Analysis
+
+    The graph compares speculative net positioning across various asset classes, expressed as a percentage of open interest.
+    Gold and Silver: Show significant positive speculative net positioning, with gold leading as a favored asset.
+    Currencies (AUD, CAD, CHF, EUR, GBP, JPY, NZD):
+        Speculative positions in the CAD, CHF, JPY, and NZD are notably net short, indicating bearish sentiment.
+        The AUD, EUR, and GBP show mixed speculative sentiment, with some marginal long positions in EUR and GBP.
+    Equities (S&P 500, Nasdaq, DJI): Positive speculative positioning indicates a favorable sentiment for equities.
+    Commodities (WTI, VIX):
+        WTI shows strong positive positioning, highlighting bullish sentiment in crude oil.
+        VIX shows neutral to slightly negative positioning, reflecting reduced market volatility expectations.
+    Bonds (2-Year Note, 10-Year Bond): Negative speculative positions suggest bearish sentiment in the bond market.
+
+2. Key Metrics
+
+    Highest Positive Net Positioning: Gold and Silver exhibit the most bullish sentiment, exceeding 60% net exposure.
+    Strongest Negative Positioning: Currencies like JPY and CAD show net short positions of around -40% to -60%.
+    Equities: The S&P 500 and Nasdaq show moderate speculative long positioning near 30%.
+    Volatility: WTI shows strong speculative interest, while VIX maintains a neutral to bearish outlook.
+
+3. Moving Averages
+
+    Moving averages are not directly depicted in the chart but could be inferred from open interest trends in key asset classes like gold and equities.
+
+4. Historical Comparisons
+
+    The positive sentiment in gold and silver aligns with recent trends during times of economic uncertainty or inflationary pressure.
+    The net short positions in currencies like JPY and CHF are consistent with prior bearish sentiment as these currencies weaken against the USD.
+    The equities market (S&P 500, Nasdaq) shows a continuation of speculative bullishness, consistent with prior recovery trends.
+
+5. Market Indicators
+
+    Gold and Silver: Act as safe-haven assets, attracting strong speculative interest during inflationary periods or geopolitical tensions.
+    Bonds: Bearish sentiment in the bond market reflects expectations of rising interest rates or reduced bond demand.
+    VIX: Neutral to bearish sentiment indicates low expectations for significant market volatility.
+    WTI Crude Oil: Positive speculative sentiment reflects strong demand or expectations for supply constraints.
+
+6. Future Projections
+
+    Gold and Silver: Likely to maintain bullish momentum, particularly if inflation persists or economic uncertainty increases.
+    Currencies: Bearish trends in currencies like JPY and CAD may continue unless there are significant policy or market shifts.
+    Equities: Positive speculative sentiment suggests further upside potential in the stock market, particularly in the S&P 500 and Nasdaq.
+    Bonds: Bearish sentiment may persist, especially if interest rate hikes are anticipated.
+    WTI Crude Oil: Continued bullish positioning indicates expectations for sustained demand or reduced supply.
+
+7. Investor Decision Support
+
+    Opportunities:
+        Favorable conditions for long positions in gold and silver due to strong speculative sentiment.
+        Consider equities like the S&P 500 and Nasdaq for bullish trades, leveraging positive speculative sentiment.
+        Crude oil (WTI) offers potential upside for traders seeking to benefit from strong demand trends.
+    Warnings:
+        Avoid bearish currencies (e.g., JPY, CAD) unless there is a reversal in speculative sentiment.
+        Monitor bond market developments, as bearish positioning indicates potential headwinds.
+        Be cautious in overextending long positions in VIX, given its neutral to bearish speculative outlook.
+    Strategic Insight:
+        Diversify exposure across positively positioned asset classes like gold, silver, and equities while hedging risks in underperforming sectors like bonds and certain currencies.
+
+0. Title of Graph
+
+    Commitment of Traders (Large Speculators, Percent Rank)
+
+1. Trend Analysis
+
+    Currencies:
+        AUD: Strongly bullish sentiment with a 3-year rank of 99.3% and a consistently high position across all timeframes.
+        CAD, CHF, EUR, NZD: Mixed sentiment, with CHF and NZD showing weaker speculative positions (low single-digit percentages for 3-month ranks).
+        JPY: Bullish momentum, evident from the 81.2% rank over three years, though less prominent in shorter timeframes.
+        GBP: Positive sentiment with a 3-year rank of 71.6%.
+    Gold and Silver:
+        Gold: Shows robust positioning, ranking 78.7% (3 years), with stable ranks in the 70%-80% range across timeframes.
+        Silver: Also bullish but with slightly lower ranks than gold, at 76.1% (3 years).
+    Equities (S&P 500, Nasdaq, DJI):
+        S&P 500 and Nasdaq exhibit extremely bullish sentiment with 100% ranks across most timeframes, indicating persistent speculative interest.
+        Dow Jones (DJI) is relatively weaker, with a 3-year rank of 56.1%.
+    Commodities and Bonds:
+        WTI: Neutral sentiment, with mid-range ranks such as 21.2% (3 years).
+        Bonds (2-Year Note and 10-Year Bond): Contrasting positions, with the 2-Year Note showing strong speculative interest (98% (3 years)) compared to weaker positioning in the 10-Year Bond (92.2% (3 years)).
+
+2. Key Metrics
+
+    Highest 3-Year Ranks:
+        AUD: 99.3%.
+        S&P 500 and Nasdaq: 100%.
+    Lowest 3-Year Ranks:
+        NZD, EUR, and CHF: Low single-digit percentages.
+    Gold vs. Silver:
+        Gold is slightly more favored, with higher ranks across all timeframes.
+
+3. Moving Averages
+
+    No moving averages are explicitly provided in the chart. However, the consistent ranks in gold, silver, and equities suggest long-term bullish momentum.
+
+4. Historical Comparisons
+
+    The 3-year and shorter-term ranks for equities indicate persistent bullish sentiment, especially for the S&P 500 and Nasdaq, reflecting continued strength in these markets.
+    Gold and silver maintain consistent ranks over timeframes, affirming their status as safe-haven assets during periods of uncertainty.
+
+5. Market Indicators
+
+    Currencies:
+        AUD is the strongest performer, maintaining high speculative interest across all timeframes.
+        NZD and CHF exhibit weaker demand.
+    Equities:
+        S&P 500 and Nasdaq dominate speculative interest, with 100% ranks showing unwavering investor confidence.
+    Gold and Silver: Maintain strong speculative ranks, reinforcing their appeal in current market conditions.
+    Bonds:
+        Strong preference for short-duration bonds (2-Year Note) over long-duration bonds (10-Year Bond).
+
+6. Future Projections
+
+    Gold and Silver: Likely to maintain strong speculative interest, particularly in uncertain economic climates or inflationary periods.
+    Equities: The S&P 500 and Nasdaq could continue to outperform, given their sustained 100% ranks.
+    Currencies:
+        AUD may remain bullish, while weaker currencies like NZD and CHF might face limited upside.
+    Bonds: Speculative preference for short-term bonds may persist if interest rate hikes or inflation remain concerns.
+
+7. Investor Decision Support
+
+    Opportunities:
+        Gold and Silver: Continue to offer safe-haven appeal and could be accumulated on dips.
+        Equities: Favor long positions in the S&P 500 and Nasdaq, given their sustained speculative interest.
+        Currencies: AUD presents strong bullish potential, making it a preferred choice in forex trades.
+    Warnings:
+        Weaker currencies like NZD and CHF show limited speculative interest, warranting caution.
+        Watch for shifts in sentiment toward long-duration bonds (10-Year Bond), as preferences currently favor shorter durations.
+    Strategic Insight:
+        Diversify positions across bullish assets such as equities, gold, and AUD while hedging risks in underperforming sectors like CHF or NZD.
+
+Metals (gold, silver, copper) futures - COT report:
+
+Net-long exposure to metals remains within a ‘cooling off’ period after being aggressively bullish earlier this year. While gold prices have tried to recover, large speculators and asset managers remain hesitant to chase the move higher. For this reason, I continue to suspect that the current recovery will fail to simply reach a fresh record high, and instead print a new cycle low as part of a deeper retracement. And if gold continues to falter, to too will silver.
+
+Copper prices have also failed to regain bullish traction despite stimulus from Beijing. And that is also being reflected in a lacklustre level of net-long exposure to the metal. 
+
+0. Title of Graph
+
+    Weekly: Gold, Silver, Copper Futures Positioning (Large Speculators, Managed Funds)
+
+1. Trend Analysis
+
+    Gold:
+        Prices have been in a steady uptrend, reaching $2,629 per ounce, after forming a strong base near $1,800 during 2022-2023.
+        Net speculative long positions remain high, with large speculators holding 234,367 contracts net long, indicating sustained bullish sentiment.
+    Silver:
+        Prices display a sideways trend, fluctuating between $20 and $30 per ounce since 2022. Current price is $30.29 per ounce.
+        Speculative positions are lower compared to gold, with 46,323 contracts net long, signaling moderate bullish sentiment.
+    Copper:
+        Copper prices show high volatility, ranging between $3.5 and $4.5 per pound. Current price is $4.05 per pound.
+        Speculative positioning is mixed, with managed funds showing reduced bullish bets, holding only 15,442 contracts net long.
+
+2. Key Metrics
+
+    Gold:
+        Price: $2,629 per ounce.
+        Speculative Net Long: 234,367 contracts.
+    Silver:
+        Price: $30.29 per ounce.
+        Speculative Net Long: 46,323 contracts.
+    Copper:
+        Price: $4.05 per pound.
+        Speculative Net Long: 15,442 contracts.
+    Volatility:
+        Copper exhibits the highest volatility, followed by silver, while gold shows relative stability with consistent upward movement.
+
+3. Moving Averages
+
+    The chart does not explicitly show moving averages, but:
+        Gold prices consistently trade above their longer-term averages, reinforcing the bullish momentum.
+        Silver prices hover near resistance levels, suggesting a lack of clear directional momentum.
+        Copper prices fluctuate around key moving averages, reflecting indecision among traders.
+
+4. Historical Comparisons
+
+    Gold:
+        Current speculative long positioning matches levels seen during previous rallies in 2020-2021.
+        Prices remain near their all-time highs, indicating strong investor confidence.
+    Silver:
+        Speculative positions and prices are weaker compared to peaks during 2021, showing reduced momentum.
+    Copper:
+        Speculative interest is notably lower than in 2021, when prices exceeded $4.50 per pound, indicating waning demand.
+
+5. Market Indicators
+
+    Gold:
+        Strong resistance near $2,650 per ounce, with immediate support at $2,500.
+        Speculative interest supports continued bullish sentiment.
+    Silver:
+        Resistance near $31 per ounce, with support at $28.
+        Flat speculative trends suggest price consolidation.
+    Copper:
+        Resistance near $4.25 per pound, with support around $3.75.
+        Mixed positioning indicates uncertainty.
+
+6. Future Projections
+
+    Gold:
+        Likely to maintain upward momentum if speculative long positions remain strong. A breakout above $2,650 could target $2,700 or higher.
+    Silver:
+        Consolidation near current levels is expected unless speculative interest increases. A move above $31 could trigger renewed bullish momentum.
+    Copper:
+        Prices are likely to remain range-bound between $3.75 and $4.25, unless there is a significant change in global demand or supply dynamics.
+
+7. Investor Decision Support
+
+    Opportunities:
+        Gold offers the most favorable risk-reward setup, supported by strong speculative interest and upward momentum.
+        Silver presents opportunities for breakout trades above $31, though speculative interest remains subdued.
+        Copper may offer range-trading opportunities within its defined levels of $3.75-$4.25.
+    Warnings:
+        Be cautious of overbought conditions in gold, as any decline in speculative interest could trigger corrections.
+        Silver's sideways trend and weaker speculative positioning suggest limited upside potential without new catalysts.
+        Copper's volatility may pose higher risks for short-term traders.
+    Strategic Insight:
+        Focus on long positions in gold, with stop-losses near $2,500.
+        Monitor speculative positioning in silver and copper to gauge shifts in market sentiment.
+        Diversify exposure to mitigate risks from volatile commodities like copper.
