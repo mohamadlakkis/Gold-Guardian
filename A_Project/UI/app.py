@@ -1,17 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 import requests
-import openai
-from dotenv import load_dotenv
-import os
-from werkzeug.utils import secure_filename
-import base64
-# Load environment variables from .env file
-load_dotenv()
 
-# OpenAI API key
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-openai.api_key = OPENAI_API_KEY
 
 
 app = Flask(__name__)
@@ -52,38 +42,55 @@ def image_RAG():
         except Exception as e:
             return render_template('index.html', error=f"An unexpected error occurred: {str(e)}")
 
+@app.route('/text-prompt', methods=['POST'])
+def text_prompt():
+    """
+    Handles text prompt queries and retrieves documents and answers from backend services.
+    """
+    if request.method == 'POST':
+        try:
+            # Step 1: Get user input
+            prompt = request.form.get("prompt", "").strip()
+            if not prompt:
+                return render_template('index.html', error="Prompt cannot be empty.")
+
+            # Step 2: Call RAG Service
+            rag_response = requests.post(
+                RAG_QUERY_URL,
+                json={"query": prompt, "top_k": 1}
+            )
+            if rag_response.status_code != 200:
+                return render_template('index.html', error="Error fetching documents from RAG service.")
+
+            rag_data = rag_response.json()
+            documents = rag_data.get("results", [])
+            if not documents:
+                return render_template('index.html', error="No relevant documents found for your query.")
+
+            document_texts = [doc["document"] for doc in documents]
+
+            # Step 3: Call Generate Answer Service
+            answer_response = requests.post(
+                GENERATE_ANSWER_URL,
+                json={"query": prompt, "documents": document_texts}
+            )
+            if answer_response.status_code != 200:
+                return render_template('index.html', error="Error generating answer from Generate Answer service.")
+
+            answer_data = answer_response.json()
+            answer = answer_data.get("answer", "No answer generated.")
+
+            # Step 4: Render the template with results
+            return render_template('index.html', prompt=prompt, documents=document_texts, answer=answer)
+
+        except Exception as e:
+            # Handle unexpected errors
+            return render_template('index.html', error=f"An unexpected error occurred: {str(e)}")
+
 
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == 'POST':
-        # Get user input
-        query = request.form.get("query")
-
-        # Step 1: Call RAG Service
-        rag_response = requests.post(
-            RAG_QUERY_URL,
-            json={"query": query, "top_k": 1}
-        )
-        if rag_response.status_code != 200:
-            return render_template('index.html', error="Error fetching documents.")
-
-        documents = rag_response.json()["results"]
-        document_texts = [doc["document"] for doc in documents]
-
-        # Step 2: Call Generate Answer Service
-        answer_response = requests.post(
-            GENERATE_ANSWER_URL,
-            json={"query": query, "documents": document_texts}
-        )
-        if answer_response.status_code != 200:
-            return render_template('index.html', error="Error generating answer.")
-
-        answer = answer_response.json()["answer"]
-
-        # Render the template with results
-        return render_template('index.html', query=query, documents=document_texts, answer=answer)
-
     return render_template('index.html')
 
 if __name__ == '__main__':

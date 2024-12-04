@@ -2,16 +2,12 @@ from flask import Flask, jsonify, request
 from embeddings.query_handler import RAGQueryHandler
 import openai
 import os
-from flask import Flask, render_template, request, jsonify
 import requests
-import openai
-from dotenv import load_dotenv
-import os
 from werkzeug.utils import secure_filename
 import base64
+
 app = Flask(__name__)
 print("Current Working Directory:", os.getcwd())
-
 # Initialize the RAG query handler
 rag_handler = RAGQueryHandler()
 RAG_QUERY_URL = "http://127.0.0.1:5000/query"
