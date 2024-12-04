@@ -3,6 +3,59 @@ import requests
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
+import re
+
+'''Helper Functionss (FIX LATER)'''
+def format_model_response(response):
+    """
+    Parses and formats the model's response into structured HTML.
+    Handles numbered sections and bullet points.
+    """
+    try:
+        # Define patterns for numbered sections and bullet points
+        section_pattern = re.compile(r"^\d+\.\s\*\*(.*?)\*\*", re.MULTILINE)  # Matches "1. **Section Name**"
+        point_pattern = re.compile(r"^- (.+)", re.MULTILINE)                 # Matches "- Bullet Point"
+
+        # Find all sections
+        sections = section_pattern.findall(response)
+        html_output = '<div class="trend-analysis">'
+
+        if sections:
+            # Split the response into sections
+            section_splits = section_pattern.split(response)
+            for i, section in enumerate(sections):
+                html_output += f"<h4>{section.strip()}</h4>"
+
+                # Get the content corresponding to this section
+                if i + 1 < len(section_splits):
+                    section_content = section_splits[i + 1].strip()
+
+                    # Extract bullet points
+                    points = point_pattern.findall(section_content)
+                    if points:
+                        html_output += "<ul>"
+                        for point in points:
+                            html_output += f"<li>{point.strip()}</li>"
+                        html_output += "</ul>"
+                    else:
+                        # If no points, display content as a paragraph
+                        html_output += f"<p>{section_content}</p>"
+
+        # Handle any loose bullet points outside sections
+        loose_points = point_pattern.findall(response)
+        if loose_points:
+            html_output += "<h4>Additional Observations:</h4><ul>"
+            for point in loose_points:
+                html_output += f"<li>{point.strip()}</li>"
+            html_output += "</ul>"
+
+        html_output += "</div>"
+        return html_output
+
+    except Exception as e:
+        # Handle unexpected formats gracefully
+        return f"<div class='trend-analysis'><p>Error formatting response: {str(e)}</p></div>"
+
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Added for session management
@@ -19,8 +72,12 @@ def image_RAG():
     """
     Handles image prompt queries and dynamically displays the uploaded image.
     """
+    session["active_tab"] = "image-query-tab"
     if request.method == 'POST':
         try:
+            # Clear previous session values for image query
+            session["prompt_image_user"] = None
+            session["answer_image"] = None
             # Get user input
             image = request.files["image"]
             prompt = request.form.get("prompt_image_user")
@@ -32,7 +89,6 @@ def image_RAG():
                     prompt_text_user=session.get("prompt_text_user"),
                     answer_text=session.get("answer_text")
                 )
-
             # Step 1: Securely save the uploaded image (to be displayed on the frontend)
             filename = secure_filename(f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{image.filename}")
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -57,6 +113,9 @@ def image_RAG():
                 )
             answer = image_response.json()["answer"]
 
+            # Parse and format the model's response
+            # formatted_analysis = format_model_response(answer)
+
             # Store image query results in session
             session["prompt_image_user"] = prompt
             session["answer_image"] = answer
@@ -65,13 +124,13 @@ def image_RAG():
             # Retrieve and pass text query results
             return render_template(
                 'index.html',
+                active_tab=session.get("active_tab", "text-query-tab"),
                 image_URL=image_url,
                 prompt_image_user=prompt,
                 answer_image=answer,
                 prompt_text_user=session.get("prompt_text_user"),
                 answer_text=session.get("answer_text")
             )
-
         except Exception as e:
             return render_template(
                 'index.html',
@@ -80,14 +139,18 @@ def image_RAG():
                 answer_text=session.get("answer_text")
             )
 
-
 @app.route('/text-prompt', methods=['POST'])
 def text_prompt():
     """
     Handles text prompt queries and retrieves documents and answers from backend services.
     """
     if request.method == 'POST':
+        session["active_tab"] = "text-query-tab"
         try:
+            # Clear previous session values for text query
+            session["prompt_text_user"] = None
+            session["answer_text"] = None
+
             # Step 1: Get user input
             prompt = request.form.get("prompt_text_user", "").strip()
             if not prompt:
@@ -150,6 +213,7 @@ def text_prompt():
             # Retrieve and pass image query results
             return render_template(
                 'index.html',
+                active_tab=session.get("active_tab", "text-query-tab"),
                 prompt_text_user=prompt,
                 answer_text=answer,
                 prompt_image_user=session.get("prompt_image_user"),
@@ -167,13 +231,16 @@ def text_prompt():
                 image_URL=session.get("image_URL")
             )
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    """
-    Renders the homepage with any retained query results from the session.
-    """
+    active_tab = session.get("active_tab", "text-query-tab")  # Default to text-query-tab
+    # clear session values on start or page refresh
+    if not session.get("prompt_text_user") and not session.get("prompt_image_user"):
+        session.clear()
     return render_template(
         'index.html',
+        active_tab=active_tab,
         prompt_text_user=session.get("prompt_text_user"),
         answer_text=session.get("answer_text"),
         prompt_image_user=session.get("prompt_image_user"),

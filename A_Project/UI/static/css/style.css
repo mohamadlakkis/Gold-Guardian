@@ -1,127 +1,108 @@
+/* General styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
 
-        /* General styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
+.header {
+  background-color: #161b22;
+  text-align: center;
+  padding: 20px;
+}
 
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-            color: #444;
-        }
+.header h1 {
+  color: #58a6ff;
+  font-size: 2.5rem;
+  margin: 0;
+}
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-            gap: 20px;
-        }
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
 
-        .form-container {
-            width: 45%;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+.nav-link {
+  text-decoration: none;
+  margin: 0 15px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #c9d1d9;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
 
-        .form-container h2 {
-            color: #555;
-        }
+.nav-link:hover {
+  color: #58a6ff;
+}
 
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+.nav-link.active {
+  color: #58a6ff;
+  border-bottom: 2px solid #58a6ff;
+}
 
-        .form-container label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #21262d;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
-        .form-container input[type="text"],
-        .form-container input[type="file"],
-        .form-container button {
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+h2 {
+  color: #58a6ff;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
 
-        .form-container input[type="text"]:focus,
-        .form-container input[type="file"]:focus,
-        .form-container button:hover {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-        }
+label {
+  display: block;
+  font-weight: bold;
+  color: #c9d1d9;
+  margin-top: 10px;
+}
 
-        .form-container button {
-            background: #007bff;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+input[type="text"],
+input[type="file"],
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #161b22;
+  color: #c9d1d9;
+}
 
-        .form-container button:hover {
-            background: #0056b3;
-        }
+button {
+  background-color: #238636;
+  color: white;
+  cursor: pointer;
+}
 
-        .results-container {
-            width: 100%;
-            margin-top: 20px;
-            padding: 20px;
-            display: flex;
-            gap: 20px;
-        }
+button:hover {
+  background-color: #2ea043;
+}
 
-        .result-text, .result-image {
-            width: 50%;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+.result-box {
+  margin-top: 20px;
+  background-color: #21262d;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
-        .result-text h3, .result-image h3 {
-            color: #333;
-        }
+.result-box h3 {
+  color: #58a6ff;
+}
 
-        .result-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .error-message {
-            color: red;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .form-container {
-                width: 100%;
-            }
-
-            .results-container {
-                flex-direction: column;
-            }
-
-            .result-text, .result-image {
-                width: 100%;
-            }
-        }
+.result-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}

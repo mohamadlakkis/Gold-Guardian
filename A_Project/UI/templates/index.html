@@ -4,24 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gold Assistant</title>
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
 </head>
 <body>
-    <h1>Gold Assistant</h1>
-    <div class="container">
-        <!-- Left Section: Text Query -->
-        <div class="form-container">
+    <header class="header">
+        <h1>Gold Assistant</h1>
+        <nav class="nav">
+            <a href="#" class="nav-link" data-tab="text-query-tab" onclick="showTab('text-query-tab')">Text Query</a>
+            <a href="#" class="nav-link" data-tab="image-query-tab" onclick="showTab('image-query-tab')">Image Query</a>
+        </nav>
+    </header>
+    <main class="container">
+        <!-- Text Query Section -->
+        <section id="text-query-tab" class="tab-content">
             <h2>Text Query</h2>
             <form method="POST" action="/text-prompt">
                 <label for="prompt_text_user">Ask a Question:</label>
                 <input type="text" id="prompt_text_user" name="prompt_text_user" placeholder="e.g., How can I invest in Gold?" required>
                 <button type="submit">Submit</button>
             </form>
-        </div>
+            {% if prompt_text_user %}
+            <div class="result-box">
+                <h3>Your Query:</h3>
+                <p>{{ prompt_text_user }}</p>
+                <h3>Answer:</h3>
+                <p>{{ answer_text }}</p>
+            </div>
+            {% endif %}
+        </section>
 
-        <!-- Right Section: Image Query -->
-        <div class="form-container">
+        <!-- Image Query Section -->
+        <section id="image-query-tab" class="tab-content" style="display: none;">
             <h2>Image Query</h2>
             <form method="POST" action="/image_RAG" enctype="multipart/form-data">
                 <label for="prompt_image_user">Describe your query for the image:</label>
@@ -30,38 +44,44 @@
                 <input type="file" id="image" name="image" accept="image/*" required>
                 <button type="submit">Submit Image Query</button>
             </form>
-        </div>
-    </div>
-
-    <!-- Results Section -->
-    <div class="results-container">
-        <!-- Text Query Results -->
-        <div class="result-text">
-            {% if prompt_text_user %}
-                <h3>Text Query:</h3>
-                <p>Your Query: {{ prompt_text_user }}</p>
-                <h3>Answer:</h3>
-                <p>{{ answer_text }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Image Query Results -->
-        <div class="result-image">
             {% if prompt_image_user %}
+            <div class="result-box">
                 <h3>Image Query:</h3>
                 <p>{{ prompt_image_user }}</p>
                 <h3>Uploaded Image:</h3>
                 {% if image_URL %}
-                    <img src="{{ image_URL }}" alt="Uploaded Image">
+                <img src="{{ image_URL }}" alt="Uploaded Image">
                 {% endif %}
                 <h3>Answer:</h3>
                 <p>{{ answer_image }}</p>
+            </div>
             {% endif %}
-        </div>
-    </div>
+        </section>
+    </main>
 
-    {% if error %}
-        <div class="error-message">{{ error }}</div>
-    {% endif %}
+    <!-- Script to dynamically set the active tab -->
+    <script>
+        // Dynamically show the active tab based on the value passed from Flask
+        window.onload = () => {
+            const activeTab = "{{ active_tab }}"; // Flask variable
+            if (activeTab) {
+                showTab(activeTab); // Call the function to show the active tab
+            } else {
+                showTab('text-query-tab'); // Default to text-query-tab
+            }
+        };
+
+        // Function to toggle tabs
+        function showTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            // Show the selected tab
+            document.getElementById(tabId).style.display = 'block';
+            // Add active class to the selected nav link
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        }
+    </script>
 </body>
 </html>

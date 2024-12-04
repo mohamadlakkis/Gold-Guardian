@@ -62,7 +62,7 @@ def extract_summary(image_data, text_data):
                     ]
                 }
             ],
-            "max_tokens": 10,
+            "max_tokens": 3000,
             "temperature": 0,
             "top_p": 1,
             "frequency_penalty": 0,
@@ -181,7 +181,27 @@ def generate_answer():
         # Formulate the prompt
         system_prompt = "You should give a careful answer. You are a Gold assistant."
         document_text = "\n\n".join(f"Document {i+1}: {doc}" for i, doc in enumerate(documents))
-        user_prompt = f"With the use of these documents provided:\n{document_text}\n\nAnswer the following question:\n{query}"
+        user_prompt = f"""
+        With the use of these documents provided:
+        {document_text}
+
+        Answer the following question:
+        {query}
+
+        Your answers should be clearly labeled and structured in the following format:
+        1. **SubTitle 1**
+            - [subAnswer 1]
+        2. **SubTitle 2**
+            - [subAnswer 2]
+        3. **SubTitle 3**
+            - [subAnswer 3]
+        etc...
+
+        Additional Instructions:
+        - Use bold subtitles (e.g., **SubTitle 1**) for clear sectioning.
+        - Use bullet points (`-`) for listing sub-answers within each section.
+        - Do not say, Certainly, Sure, etc. Or based on the provided documents. Just provide the answer. 
+        """
 
         # Call GPT-4o
         response = openai.ChatCompletion.create(
