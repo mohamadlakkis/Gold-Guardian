@@ -1,3 +1,4 @@
 .env
 embeddings_documents.db/
 Virtual_Env_Gold/
+gold-dataset-sinha-khandait.csv
