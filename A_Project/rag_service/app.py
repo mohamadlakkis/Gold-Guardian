@@ -266,7 +266,6 @@ def generate_answer():
         return jsonify({"error": str(e)}), 500
 
 
-
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "RAG service is running"}), 200
