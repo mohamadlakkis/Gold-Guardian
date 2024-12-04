@@ -12,48 +12,50 @@
         <input type="text" id="query" name="query" placeholder="e.g., How can I invest in Gold?" required>
         <button type="submit">Submit</button>
     </form>
-    <h2>Image and Prompt Query</h2>
-      <form method="POST" action="/image-query" enctype="multipart/form-data">
-      <label for="prompt">Enter a Prompt:</label><br>
-      <input type="text" id="prompt" name="prompt" placeholder="Describe the image or ask a question" required><br>
+    <!-- Form for Image Query -->
+    <form method="POST" action="/image_RAG" enctype="multipart/form-data" style="margin-top: 20px;">
+      <label for="prompt">Describe your query for the image:</label><br>
+      <input type="text" id="prompt" name="prompt" placeholder="e.g., Analyze trends in the chart" required><br><br>
       <label for="image">Upload an Image:</label><br>
-      <input type="file" id="image" name="image" accept="image/*" required><br>
-      <button type="submit">Submit</button>
-      </form>
-
-
+      <input type="file" id="image" name="image" accept="image/*" required><br><br>
+      <button type="submit">Submit Image Query</button>
+  </form>
     {% if query %}
         <h2>Your Query:</h2>
         <p>{{ query }}</p>
 
-        <h2>Retrieved Documents:</h2>
+        <!-- <h2>Retrieved Documents:</h2>
         <ul>
             {% for doc in documents %}
                 <li>{{ doc }}</li>
             {% endfor %}
-        </ul>
+        </ul> -->
+
+        <h2>Answer:</h2>
+        <p>{{ answer }}</p>
+    {% endif %}
+    <!-- Display Results for Image Query -->
+    {% if prompt %}
+        <h2>Your Image Query:</h2>
+        <p>{{ prompt }}</p>
+        <h2>Uploaded Image:</h2>
+        {% if image_URL %}
+            <img src="{{ image_URL }}" alt="Uploaded Image" style="max-width: 500px; max-height: 500px;">
+        {% endif %}
+        <!-- <h2>Retrieved Documents:</h2>
+        <ul>
+            {% for doc in documents %}
+                <li>{{ doc }}</li>
+            {% endfor %}
+        </ul> -->
 
         <h2>Answer:</h2>
         <p>{{ answer }}</p>
     {% endif %}
 
+
     {% if error %}
         <h3 style="color: red;">{{ error }}</h3>
     {% endif %}
-    {% if image_prompt %}
-    <h2>Image Prompt:</h2>
-    <p>{{ image_prompt }}</p>
-
-    <h2>Retrieved Documents:</h2>
-    <ul>
-        {% for doc in documents %}
-            <li>{{ doc }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Answer:</h2>
-    <p>{{ answer }}</p>
-{% endif %}
-
 </body>
 </html>

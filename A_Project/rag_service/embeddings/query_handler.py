@@ -6,7 +6,9 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+openai.api_key = OPENAI_API_KEY
 class RAGQueryHandler:
     def __init__(self):
         # Dynamically build the absolute path for the database file

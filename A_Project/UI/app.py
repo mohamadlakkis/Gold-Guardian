@@ -19,128 +19,38 @@ app = Flask(__name__)
 # URLs for the backend services
 RAG_QUERY_URL = "http://127.0.0.1:5000/query"
 GENERATE_ANSWER_URL = "http://127.0.0.1:5000/generate-answer"
+IMAGE_PROMPT_URL = "http://127.0.0.1:5000/image-prompt"
 
+@app.route('/image_RAG', methods = ['POST'])
+def image_RAG():
+    if request.method == 'POST':
+        try:
+            # Get user input
+            image = request.files["image"]
+            prompt = request.form.get("prompt")
 
-
-def encode_image(image_path):
-    """
-    Encodes an image file to base64 string
-    """
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
-
-def extract_summary(image_data,text_data):
-    """
-    Extracts summary from an image using OpenAI Vision
-    """
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {OPENAI_API_KEY}"
-    }
-    payload = {
-        "model": "gpt-4o",
-        "messages": [
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": f"""
-                                You are a financial assistant specializing in gold market analysis. Analyze the provided image/chart/graph and provide a comprehensive summary with a focus on key data points, trends, and actionable insights. Structure your analysis into clear, concise points covering the following:
-
-                                1. Trend Analysis: Describe visible patterns in the data, such as upward, downward, or stable trends. Include specific numerical data (e.g., 'The price started at X, increased to Y, decreased to Z, and then rose to A') to illustrate the movement.
-
-                                2. Key Metrics: Identify and report on significant metrics such as the highest and lowest prices, volatility, and notable price movements.
-
-                                3. Moving Averages: Highlight any visible moving averages, specifying their values and any observed crossovers or deviations from the actual prices.
-
-                                3. Historical Comparisons: Compare the current data to past trends, noting similarities, differences, or deviations from historical patterns.
-
-                                4. Market Indicators: Identify significant indicators such as support and resistance levels, breakouts, or any other noteworthy market signals.
-
-                                5. Future Projections: Provide insights on potential future movements or predictions, including the likelihood of trends continuing, reversing, or stabilizing.
-
-                                6. Investor Decision Support: Summarize actionable insights to assist investors, including any warnings or opportunities related to the data.
-
-                                Format the analysis as a list of points, ensuring clarity and relevance to investor decision-making and trend prediction.
-                                Note: Your sole goal, is to provide the best summary of a chart and convert it into a text, so other models that understands only text can understand the image.
-                                The user is interested in knowing {text_data} from the image. You are responsible for providing a good description of the image so that another model can use the text (i.e. the description of the image) to answer the user's query.
-                                """
-                    },
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": f"data:image/png;base64,{image_data}"}
-                    }
-                ]
-            }
-        ],
-        "max_tokens": 3000,
-        "temperature": 0,
-        "top_p": 1,
-        "frequency_penalty": 0,
-        "presence_penalty": 0
-    }
-    response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-    response_data = response.json()
-    if "choices" in response_data and len(response_data["choices"]) > 0:
-        return response_data["choices"][0]["message"]["content"]
-    else:
-        return "Could not extract text from image."
-
-
-
-@app.route('/image-query', methods=['POST'])
-def image_query():
-    """
-    Handles image and prompt queries.
-    1. Passes the image and prompt to GPT-4o.
-    2. Uses the response from GPT-4o to query the RAG service.
-    3. Passes retrieved documents and a custom prompt to GPT-4o for the final answer.
-    """
-    try:
-        ### Step 1: Get the uploaded image and prompt
-        prompt = request.form.get("prompt")
-        image = request.files.get("image")
-
-        if not prompt or not image:
-            return render_template('index.html', error="Both image and prompt are required.")
-
-
-        ### Step 2: Call GPT-4o to process the image and initial prompt
-        'Secure the filename and save the image temporarily'
-        filename = secure_filename(image.filename)
-        temp_path = os.path.join("/tmp", filename)  # Save to a temporary directory
-        image.save(temp_path)
-
-        # Step 2: Call GPT-4 to process the image and initial prompt
-        with open(temp_path, "rb") as img_file:
-            image_data = base64.b64encode(img_file.read()).decode('utf-8')
-        image_desc  = extract_summary(image_data,prompt)
-
-        ### Step 3: Query the RAG service with the generated query
-        rag_response = requests.post(
-            RAG_QUERY_URL,
-            json={"query": image_desc, "top_k":2}
-        )
-        rag_response.raise_for_status()
-        documents = [doc["document"] for doc in rag_response.json().get("results", [])]
-
-        ### Step 4: Pass the documents and a final custom prompt to GPT-4
-        final_prompt = f"Using the following documents: {documents}. Answer this query: {prompt}, based on this image: {image_desc}"
-
-        gpt_response = openai.ChatCompletion.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": "You will be answering a query on an image based on documents provided, and a description of the image."},
-                {"role": "user", "content": final_prompt}
-            ]
-        )
-        final_answer = gpt_response["choices"][0]["message"]["content"]
-
-        return render_template('index.html', image_prompt=prompt, documents=documents, answer=final_answer)
-
-    except Exception as e:
-        return render_template('index.html', error=f"An error occurred: {str(e)}")
+            # Step 1: Call Image Prompt Service
+            image_response = requests.post(
+                IMAGE_PROMPT_URL,
+                files={"image": image},
+                data={"prompt": prompt}
+            )
+            if image_response.status_code != 200:
+                return render_template('index.html', error="Error processing image/Prompt.")
+            answer = image_response.json()["answer"]
+            '''Show the image on the website as well'''
+            # # Secure filename and save the image temporarily
+            # filename = secure_filename(image.filename)
+            # current_dir = os.path.dirname(os.path.abspath(__file__))  # Current file directory
+            # temp_path = os.path.join(current_dir+"/static/uploads",filename)
+            
+            # # os.makedirs(os.path.dirname(temp_path), exist_ok=True)  # Ensure the directory exists
+            # image.save(temp_path)
+            # image_url = f"{current_dir}/static/uploads/{filename}"
+            image_url = "https://images.pexels.com/photos/47047/gold-ingots-golden-treasure-47047.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            return render_template('index.html', image_URL=image_url, prompt=prompt, answer=answer)
+        except Exception as e:
+            return render_template('index.html', error=f"An unexpected error occurred: {str(e)}")
 
 
 
