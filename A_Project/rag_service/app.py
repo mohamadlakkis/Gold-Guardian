@@ -117,14 +117,50 @@ def image_query():
         documents = [doc["document"] for doc in rag_response.json().get("results", [])]
 
         # Step 5: Call GPT-4 for the final answer
-        final_prompt = f"Using the following documents: {documents}. Answer this query: {prompt}, based on this image: {image_desc}"
+        final_prompt = f"""
+            Using the provided documents:
+            {documents}
+
+            Answer the following question in a structured HTML format:
+            {prompt}
+
+            Expected Output Format:
+            <div class="trend-analysis">
+                <h4>1. SubTitle 1</h4>
+                <ul>
+                    <li>SubAnswer 1</li>
+                </ul>
+                <h4>2. SubTitle 2</h4>
+                <ul>
+                    <li>SubAnswer 2</li>
+                </ul>
+                <h4>3. SubTitle 3</h4>
+                <ul>
+                    <li>SubAnswer 3</li>
+                </ul>
+                ... etc same format(you are not limited to 3 sub-answers)
+            </div>
+
+            Additional Instructions:
+            - Use `<h4>` tags for bold subtitles (e.g., **SubTitle 1**).
+            - Use `<ul>` and `<li>` for listing sub-answers within each section.
+            - Do not include extraneous text such as "Based on the provided documents" or "Certainly."
+            - Respond concisely and stick to the format above without deviation.
+            -do not start your answer with ```html
+        """
+        # final_prompt = f"Using the following documents: {documents}. Answer this query: {prompt}, based on this image: {image_desc}"
 
         gpt_response = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You will be answering a query on an image based on documents provided, and a description of the image."},
                 {"role": "user", "content": final_prompt}
-            ]
+            ], 
+            max_tokens = 3000,
+            temperature = 0,
+            top_p = 1,
+            frequency_penalty = 0,
+            presence_penalty = 0
         )
         final_answer = gpt_response["choices"][0]["message"]["content"]
 
@@ -182,26 +218,36 @@ def generate_answer():
         system_prompt = "You should give a careful answer. You are a Gold assistant."
         document_text = "\n\n".join(f"Document {i+1}: {doc}" for i, doc in enumerate(documents))
         user_prompt = f"""
-        With the use of these documents provided:
-        {document_text}
+            Using the provided documents:
+            {document_text}
 
-        Answer the following question:
-        {query}
+            Answer the following question in a structured HTML format:
+            {query}
 
-        Your answers should be clearly labeled and structured in the following format:
-        1. **SubTitle 1**
-            - [subAnswer 1]
-        2. **SubTitle 2**
-            - [subAnswer 2]
-        3. **SubTitle 3**
-            - [subAnswer 3]
-        etc...
-
-        Additional Instructions:
-        - Use bold subtitles (e.g., **SubTitle 1**) for clear sectioning.
-        - Use bullet points (`-`) for listing sub-answers within each section.
-        - Do not say, Certainly, Sure, etc. Or based on the provided documents. Just provide the answer. 
+            Expected Output Format:
+            <div class="trend-analysis">
+                <h4>1. SubTitle 1</h4>
+                <ul>
+                    <li>SubAnswer 1</li>
+                </ul>
+                <h4>2. SubTitle 2</h4>
+                <ul>
+                    <li>SubAnswer 2</li>
+                </ul>
+                <h4>3. SubTitle 3</h4>
+                <ul>
+                    <li>SubAnswer 3</li>
+                </ul>
+            </div>
+            ... etc same format(you are not limited to 3 sub-answers)
+            Additional Instructions:
+            - Use `<h4>` tags for bold subtitles (e.g., **SubTitle 1**).
+            - Use `<ul>` and `<li>` for listing sub-answers within each section.
+            - Do not include extraneous text such as "Based on the provided documents" or "Certainly."
+            - Respond concisely and stick to the format above without deviation.
+            -do not start your answer with ```html
         """
+
 
         # Call GPT-4o
         response = openai.ChatCompletion.create(

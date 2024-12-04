@@ -29,7 +29,7 @@
                 <h3>Your Query:</h3>
                 <p>{{ prompt_text_user }}</p>
                 <h3>Answer:</h3>
-                <p>{{ answer_text }}</p>
+                <p>{{ answer_text |safe}}</p>
             </div>
             {% endif %}
         </section>
@@ -53,7 +53,7 @@
                 <img src="{{ image_URL }}" alt="Uploaded Image">
                 {% endif %}
                 <h3>Answer:</h3>
-                <p>{{ answer_image }}</p>
+                <p>{{ answer_image |safe}}</p>
             </div>
             {% endif %}
         </section>

@@ -112,7 +112,7 @@ def image_RAG():
                     answer_text=session.get("answer_text")
                 )
             answer = image_response.json()["answer"]
-
+            print(answer)
             # Parse and format the model's response
             # formatted_analysis = format_model_response(answer)
 
@@ -205,7 +205,7 @@ def text_prompt():
 
             answer_data = answer_response.json()
             answer = answer_data.get("answer", "No answer generated.")
-
+            print(answer)
             # Store text query results in session
             session["prompt_text_user"] = prompt
             session["answer_text"] = answer
