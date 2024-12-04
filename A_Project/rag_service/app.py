@@ -62,7 +62,7 @@ def extract_summary(image_data, text_data):
                     ]
                 }
             ],
-            "max_tokens": 3000,
+            "max_tokens": 10,
             "temperature": 0,
             "top_p": 1,
             "frequency_penalty": 0,

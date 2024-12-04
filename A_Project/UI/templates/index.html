@@ -4,58 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gold Assistant</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>Gold Assistant</h1>
-    <form method="POST" action="/text-prompt">
-        <label for="query">Ask a Question:</label><br>
-        <input type="text" id="query" name="prompt" placeholder="e.g., How can I invest in Gold?" required>
-        <button type="submit">Submit</button>
-    </form>
-    <!-- Form for Image Query -->
-    <form method="POST" action="/image_RAG" enctype="multipart/form-data" style="margin-top: 20px;">
-      <label for="prompt">Describe your query for the image:</label><br>
-      <input type="text" id="prompt" name="prompt" placeholder="e.g., Analyze trends in the chart" required><br><br>
-      <label for="image">Upload an Image:</label><br>
-      <input type="file" id="image" name="image" accept="image/*" required><br><br>
-      <button type="submit">Submit Image Query</button>
-  </form>
-    {% if query %}
-        <h2>Your Query:</h2>
-        <p>{{ query }}</p>
+    <div class="container">
+        <!-- Left Section: Text Query -->
+        <div class="form-container">
+            <h2>Text Query</h2>
+            <form method="POST" action="/text-prompt">
+                <label for="prompt_text_user">Ask a Question:</label>
+                <input type="text" id="prompt_text_user" name="prompt_text_user" placeholder="e.g., How can I invest in Gold?" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
 
-        <!-- <h2>Retrieved Documents:</h2>
-        <ul>
-            {% for doc in documents %}
-                <li>{{ doc }}</li>
-            {% endfor %}
-        </ul> -->
+        <!-- Right Section: Image Query -->
+        <div class="form-container">
+            <h2>Image Query</h2>
+            <form method="POST" action="/image_RAG" enctype="multipart/form-data">
+                <label for="prompt_image_user">Describe your query for the image:</label>
+                <input type="text" id="prompt_image_user" name="prompt_image_user" placeholder="e.g., Analyze trends in the chart" required>
+                <label for="image">Upload an Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <button type="submit">Submit Image Query</button>
+            </form>
+        </div>
+    </div>
 
-        <h2>Answer:</h2>
-        <p>{{ answer }}</p>
-    {% endif %}
-    <!-- Display Results for Image Query -->
-    {% if prompt %}
-        <h2>Your Image Query:</h2>
-        <p>{{ prompt }}</p>
-        <h2>Uploaded Image:</h2>
-        {% if image_URL %}
-            <img src="{{ image_URL }}" alt="Uploaded Image" style="max-width: 500px; max-height: 500px;">
-        {% endif %}
-        <!-- <h2>Retrieved Documents:</h2>
-        <ul>
-            {% for doc in documents %}
-                <li>{{ doc }}</li>
-            {% endfor %}
-        </ul> -->
+    <!-- Results Section -->
+    <div class="results-container">
+        <!-- Text Query Results -->
+        <div class="result-text">
+            {% if prompt_text_user %}
+                <h3>Text Query:</h3>
+                <p>Your Query: {{ prompt_text_user }}</p>
+                <h3>Answer:</h3>
+                <p>{{ answer_text }}</p>
+            {% endif %}
+        </div>
 
-        <h2>Answer:</h2>
-        <p>{{ answer }}</p>
-    {% endif %}
-
+        <!-- Image Query Results -->
+        <div class="result-image">
+            {% if prompt_image_user %}
+                <h3>Image Query:</h3>
+                <p>{{ prompt_image_user }}</p>
+                <h3>Uploaded Image:</h3>
+                {% if image_URL %}
+                    <img src="{{ image_URL }}" alt="Uploaded Image">
+                {% endif %}
+                <h3>Answer:</h3>
+                <p>{{ answer_image }}</p>
+            {% endif %}
+        </div>
+    </div>
 
     {% if error %}
-        <h3 style="color: red;">{{ error }}</h3>
+        <div class="error-message">{{ error }}</div>
     {% endif %}
 </body>
 </html>
