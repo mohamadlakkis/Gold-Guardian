@@ -1,3 +1,7 @@
 ft:gpt-4o-mini-2024-07-18:personal:sentiment-analysis:AaiuCkPu
 
-ft:gpt-4o-mini-2024-07-18:personal:q-and-a:AajU3xoJ
+
+% V1.0
+ft:gpt-4o-mini-2024-07-18:personal:q-and-a:AajU3xoJ 
+
+% V2.0
