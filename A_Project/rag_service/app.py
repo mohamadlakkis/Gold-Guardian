@@ -10,7 +10,7 @@ app = Flask(__name__)
 print("Current Working Directory:", os.getcwd())
 # Initialize the RAG query handler
 rag_handler = RAGQueryHandler()
-RAG_QUERY_URL = "http://127.0.0.1:5000/query"
+RAG_QUERY_URL = "http://127.0.0.1:5001/query"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
@@ -150,7 +150,7 @@ def image_query():
         """
         # final_prompt = f"Using the following documents: {documents}. Answer this query: {prompt}, based on this image: {image_desc}"
 
-        gpt_response = openai.ChatCompletion.create(
+        gpt_response = openai.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You will be answering a query on an image based on documents provided, and a description of the image."},
@@ -162,7 +162,7 @@ def image_query():
             frequency_penalty = 0,
             presence_penalty = 0
         )
-        final_answer = gpt_response["choices"][0]["message"]["content"]
+        final_answer = gpt_response.choices[0].message.content
 
         return jsonify({"image_prompt": prompt, "documents": documents, "answer": final_answer}), 200
 
@@ -250,7 +250,7 @@ def generate_answer():
 
 
         # Call GPT-4o
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -259,7 +259,7 @@ def generate_answer():
         )
 
         # Extract GPT-4o response
-        answer = response['choices'][0]['message']['content']
+        answer = response.choices[0].message.content
         return jsonify({"answer": answer}), 200
 
     except Exception as e:
@@ -271,4 +271,4 @@ def health_check():
     return jsonify({"status": "RAG service is running"}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)

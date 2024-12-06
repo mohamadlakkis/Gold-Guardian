@@ -3,69 +3,19 @@ import requests
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
-import re
-
-'''Helper Functionss (FIX LATER)'''
-def format_model_response(response):
-    """
-    Parses and formats the model's response into structured HTML.
-    Handles numbered sections and bullet points.
-    """
-    try:
-        # Define patterns for numbered sections and bullet points
-        section_pattern = re.compile(r"^\d+\.\s\*\*(.*?)\*\*", re.MULTILINE)  # Matches "1. **Section Name**"
-        point_pattern = re.compile(r"^- (.+)", re.MULTILINE)                 # Matches "- Bullet Point"
-
-        # Find all sections
-        sections = section_pattern.findall(response)
-        html_output = '<div class="trend-analysis">'
-
-        if sections:
-            # Split the response into sections
-            section_splits = section_pattern.split(response)
-            for i, section in enumerate(sections):
-                html_output += f"<h4>{section.strip()}</h4>"
-
-                # Get the content corresponding to this section
-                if i + 1 < len(section_splits):
-                    section_content = section_splits[i + 1].strip()
-
-                    # Extract bullet points
-                    points = point_pattern.findall(section_content)
-                    if points:
-                        html_output += "<ul>"
-                        for point in points:
-                            html_output += f"<li>{point.strip()}</li>"
-                        html_output += "</ul>"
-                    else:
-                        # If no points, display content as a paragraph
-                        html_output += f"<p>{section_content}</p>"
-
-        # Handle any loose bullet points outside sections
-        loose_points = point_pattern.findall(response)
-        if loose_points:
-            html_output += "<h4>Additional Observations:</h4><ul>"
-            for point in loose_points:
-                html_output += f"<li>{point.strip()}</li>"
-            html_output += "</ul>"
-
-        html_output += "</div>"
-        return html_output
-
-    except Exception as e:
-        # Handle unexpected formats gracefully
-        return f"<div class='trend-analysis'><p>Error formatting response: {str(e)}</p></div>"
 
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Added for session management
 
 # URLs for the backend services
-RAG_QUERY_URL = "http://127.0.0.1:5000/query"
-GENERATE_ANSWER_URL = "http://127.0.0.1:5000/generate-answer"
-IMAGE_PROMPT_URL = "http://127.0.0.1:5000/image-prompt"
+RAG_QUERY_URL = "http://127.0.0.1:5001/query"
+GENERATE_ANSWER_URL = "http://127.0.0.1:5001/generate-answer"
+IMAGE_PROMPT_URL = "http://127.0.0.1:5001/image-prompt"
+SENTIMENT_URL = "http://127.0.0.1:5002/sentiment"
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 @app.route('/image_RAG', methods=['POST'])
 def image_RAG():
@@ -139,6 +89,7 @@ def image_RAG():
                 answer_text=session.get("answer_text")
             )
 
+
 @app.route('/text-prompt', methods=['POST'])
 def text_prompt():
     """
@@ -205,7 +156,7 @@ def text_prompt():
 
             answer_data = answer_response.json()
             answer = answer_data.get("answer", "No answer generated.")
-            print(answer)
+
             # Store text query results in session
             session["prompt_text_user"] = prompt
             session["answer_text"] = answer
@@ -232,11 +183,80 @@ def text_prompt():
             )
 
 
+@app.route('/sentiment', methods=['POST'])
+def sentiment():
+    """
+    Handles sentiment analysis queries and returns the sentiment of the user input.
+    """
+    if request.method == 'POST':
+        try:
+            # Get user input
+            text = request.form.get("prompt_sentiment_user", "").strip()
+            if not text:
+                return render_template(
+                    'index.html',
+                    error="Text cannot be empty.",
+                    prompt_text_user=session.get("prompt_text_user"),
+                    answer_text=session.get("answer_text"),
+                    prompt_image_user=session.get("prompt_image_user"),
+                    answer_image=session.get("answer_image"),
+                    image_URL=session.get("image_URL")
+                )
+
+            # Call Sentiment Analysis Service
+            sentiment_response = requests.post(
+                SENTIMENT_URL,
+                json={"text": text}
+            )
+
+            if sentiment_response.status_code != 200:
+                return render_template(
+                    'index.html',
+                    error="Error fetching sentiment from Sentiment Analysis service.",
+                    prompt_text_user=session.get("prompt_text_user"),
+                    answer_text=session.get("answer_text"),
+                    prompt_image_user=session.get("prompt_image_user"),
+                    prompt_sentiment_user=session.get("prompt_sentiment_user"),
+                    answer_image=session.get("answer_image"),
+                    image_URL=session.get("image_URL")
+                )
+
+            sentiment_data = sentiment_response.json()
+            sentiment = sentiment_data.get("sentiment", "No sentiment detected.")
+
+            # Pass sentiment result to the frontend
+            return render_template(
+                'index.html',
+                active_tab="sentiment-tab",
+                prompt_sentiment_user=text,
+                sentiment=sentiment,
+                prompt_text_user=session.get("prompt_text_user"),
+                answer_text=session.get("answer_text"),
+                prompt_image_user=session.get("prompt_image_user"),
+                # prompt_sentiment_user=session.get("prompt_sentiment_user"),
+                answer_image=session.get("answer_image"),
+                image_URL=session.get("image_URL")
+            )
+
+        except Exception as e:
+            # Handle unexpected errors
+            return render_template(
+                'index.html',
+                error=f"An unexpected error occurred: {str(e)}",
+                prompt_text_user=session.get("prompt_text_user"),
+                answer_text=session.get("answer_text"),
+                prompt_image_user=session.get("prompt_image_user"),
+                answer_image=session.get("answer_image"),
+                image_URL=session.get("image_URL")
+            )
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     active_tab = session.get("active_tab", "text-query-tab")  # Default to text-query-tab
     # clear session values on start or page refresh
-    if not session.get("prompt_text_user") and not session.get("prompt_image_user"):
+    valid_sessions = ["prompt_text_user", "prompt_image_user", "sentiment"]
+    if not all([session.get(key) for key in valid_sessions]):
         session.clear()
     return render_template(
         'index.html',
@@ -244,9 +264,11 @@ def home():
         prompt_text_user=session.get("prompt_text_user"),
         answer_text=session.get("answer_text"),
         prompt_image_user=session.get("prompt_image_user"),
+        prompt_sentiment_user=session.get("prompt_sentiment_user"),
         answer_image=session.get("answer_image"),
         image_URL=session.get("image_URL")
     )
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
