@@ -13,6 +13,7 @@
         <nav class="nav">
             <a href="#" class="nav-link" data-tab="text-query-tab" onclick="showTab('text-query-tab')">Text Query</a>
             <a href="#" class="nav-link" data-tab="image-query-tab" onclick="showTab('image-query-tab')">Image Query</a>
+            <a href="#" class="nav-link" data-tab="sentiment-tab" onclick="showTab('sentiment-tab')">Sentiment</a>
         </nav>
     </header>
     <main class="container">
@@ -54,6 +55,24 @@
                 {% endif %}
                 <h3>Answer:</h3>
                 <p>{{ answer_image |safe}}</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- Sentiment Section -->
+        <section id="sentiment-tab" class="tab-content" style="display: none;">
+            <h2>Sentiment</h2>
+            <form method="POST" action="/sentiment">
+                <label for="prompt_sentiment_user">Enter a sentence for sentiment:</label>
+                <input type="text" id="prompt_sentiment_user" name="prompt_sentiment_user" placeholder="e.g., Elections are now running in the USA, what should we do?" required>
+                <button type="submit">Analyze Sentiment</button>
+            </form>
+            {% if prompt_sentiment_user %}
+            <div class="result-box">
+                <h3>Your Sentence:</h3>
+                <p>{{ prompt_sentiment_user }}</p>
+                <h3>Sentiment:</h3>
+                <p>{{ sentiment |safe}}</p>
             </div>
             {% endif %}
         </section>
