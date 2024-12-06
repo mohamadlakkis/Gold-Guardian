@@ -62,7 +62,7 @@ def image_RAG():
                     answer_text=session.get("answer_text")
                 )
             answer = image_response.json()["answer"]
-            print(answer)
+            # print(answer)
             # Parse and format the model's response
             # formatted_analysis = format_model_response(answer)
 

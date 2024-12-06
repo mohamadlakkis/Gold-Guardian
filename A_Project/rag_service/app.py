@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import base64
 
 app = Flask(__name__)
-print("Current Working Directory:", os.getcwd())
+# print("Current Working Directory:", os.getcwd())
 # Initialize the RAG query handler
 rag_handler = RAGQueryHandler()
 RAG_QUERY_URL = "http://127.0.0.1:5001/query"
@@ -121,6 +121,8 @@ def image_query():
             Using the provided documents:
             {documents}
 
+            If the image is related to gold, answer the following question in a structured HTML format:
+
             Answer the following question in a structured HTML format:
             {prompt}
 
@@ -147,13 +149,15 @@ def image_query():
             - Do not include extraneous text such as "Based on the provided documents" or "Certainly."
             - Respond concisely and stick to the format above without deviation.
             -do not start your answer with ```html
+
+            If the image is not related to gold, provide an appropriate message.
         """
         # final_prompt = f"Using the following documents: {documents}. Answer this query: {prompt}, based on this image: {image_desc}"
 
         gpt_response = openai.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You will be answering a query on an image based on documents provided, and a description of the image."},
+                {"role": "system", "content": "You will be answering a query on an image based on documents provided, and a description of the image if it is related to gold, if it is not show an appropriate message."},
                 {"role": "user", "content": final_prompt}
             ], 
             max_tokens = 3000,

@@ -40,12 +40,15 @@ api_key = "sk-proj-VAh5NpyLDyncXMgSUaPYSQrguuteis-fCgSZlzJ0_psBhE3bG0t5m8aspUCEK
 '''
 https://docs.trychroma.com/guides
 '''
+
+
 def encode_image(image_path):
     """
     Encodes an image file to base64 string
     """
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
+
 
 def extract_summary(image_data):
     """
@@ -108,4 +111,4 @@ def extract_summary(image_data):
 image_path = 'image.png'
 image_data = encode_image(image_path)
 description_image = extract_summary(image_data)
-print(description_image)
+# print(description_image)
