@@ -400,7 +400,8 @@ def predict():
         # Extract prediction and image URL
         prediction_LSTM = response.json().get("prediction_LSTM")
         image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
-
+        # format prediction LSTM: 2683.6902765928244 to 2683.69 $ 
+        prediction_LSTM = f"{float(prediction_LSTM):.2f} $"
         # Return only the HTML content for the prediction container
         return render_template(
             'prediction_content.html',
