@@ -13,6 +13,7 @@ RAG_QUERY_URL = "http://127.0.0.1:5001/query"
 GENERATE_ANSWER_URL = "http://127.0.0.1:5001/generate-answer"
 IMAGE_PROMPT_URL = "http://127.0.0.1:5001/image-prompt"
 SENTIMENT_URL = "http://127.0.0.1:5002/sentiment"
+Q_AND_A_URL = "http://127.0.0.1:5003/answer"
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -251,6 +252,91 @@ def sentiment():
             )
 
 
+@app.route('/chatbot-query', methods=['POST'])
+def chatbot_query():
+    """
+    Handles chatbot queries and maintains a conversation with the Q&A backend.
+    """
+    session["active_tab"] = "chatbot-tab"
+    try:
+        # Get user input
+        user_input = request.form.get("chatbot_input", "").strip()
+        if not user_input:
+            return render_template(
+                'index.html',
+                error="Chat input cannot be empty.",
+                active_tab=session.get("active_tab", "chatbot-tab"),
+                conversation=session.get("conversation", []),
+                prompt_text_user=session.get("prompt_text_user"),
+                answer_text=session.get("answer_text"),
+                prompt_image_user=session.get("prompt_image_user"),
+                answer_image=session.get("answer_image"),
+                image_URL=session.get("image_URL"),
+                prompt_sentiment_user=session.get("prompt_sentiment_user"),
+            )
+
+        # Retrieve old_messages from session or initialize
+        old_messages = session.get("conversation", [])
+
+        # Add the user's message to old_messages
+        old_messages.append({"role": "user", "content": user_input})
+
+        # Call Q&A service
+        qa_response = requests.post(Q_AND_A_URL, json={
+            "question": user_input,
+            "old_messages": old_messages
+        })
+
+        if qa_response.status_code != 200:
+            return render_template(
+                'index.html',
+                error="Error communicating with Q&A service.",
+                active_tab=session.get("active_tab", "chatbot-tab"),
+                conversation=old_messages,
+                prompt_text_user=session.get("prompt_text_user"),
+                answer_text=session.get("answer_text"),
+                prompt_image_user=session.get("prompt_image_user"),
+                answer_image=session.get("answer_image"),
+                image_URL=session.get("image_URL"),
+                prompt_sentiment_user=session.get("prompt_sentiment_user"),
+            )
+
+        qa_data = qa_response.json()
+        assistant_answer = qa_data.get("answer", "No answer returned.")
+
+        # Add the assistant's response to old_messages
+        old_messages.append({"role": "assistant", "content": assistant_answer})
+
+        # Update session with the new conversation
+        session["conversation"] = old_messages
+
+        return render_template(
+            'index.html',
+            active_tab="chatbot-tab",
+            conversation=old_messages,
+            prompt_text_user=session.get("prompt_text_user"),
+            answer_text=session.get("answer_text"),
+            prompt_image_user=session.get("prompt_image_user"),
+            answer_image=session.get("answer_image"),
+            image_URL=session.get("image_URL"),
+            prompt_sentiment_user=session.get("prompt_sentiment_user")
+        )
+
+    except Exception as e:
+        return render_template(
+            'index.html',
+            error=f"An unexpected error occurred: {str(e)}",
+            active_tab="chatbot-tab",
+            conversation=session.get("conversation", []),
+            prompt_text_user=session.get("prompt_text_user"),
+            answer_text=session.get("answer_text"),
+            prompt_image_user=session.get("prompt_image_user"),
+            answer_image=session.get("answer_image"),
+            image_URL=session.get("image_URL"),
+            prompt_sentiment_user=session.get("prompt_sentiment_user")
+        )
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     active_tab = session.get("active_tab", "text-query-tab")  # Default to text-query-tab
@@ -266,7 +352,8 @@ def home():
         prompt_image_user=session.get("prompt_image_user"),
         prompt_sentiment_user=session.get("prompt_sentiment_user"),
         answer_image=session.get("answer_image"),
-        image_URL=session.get("image_URL")
+        image_URL=session.get("image_URL"),
+        conversation=session.get("conversation", [])
     )
 
 

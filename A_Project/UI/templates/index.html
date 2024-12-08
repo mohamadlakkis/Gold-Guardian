@@ -14,6 +14,8 @@
             <a href="#" class="nav-link" data-tab="text-query-tab" onclick="showTab('text-query-tab')">Text Query</a>
             <a href="#" class="nav-link" data-tab="image-query-tab" onclick="showTab('image-query-tab')">Image Query</a>
             <a href="#" class="nav-link" data-tab="sentiment-tab" onclick="showTab('sentiment-tab')">Sentiment</a>
+            <!-- New Chatbot Tab -->
+            <a href="#" class="nav-link" data-tab="chatbot-tab" onclick="showTab('chatbot-tab')">Chatbot</a>
         </nav>
     </header>
     <main class="container">
@@ -76,9 +78,29 @@
             </div>
             {% endif %}
         </section>
+
+        <!-- Chatbot Section -->
+        <section id="chatbot-tab" class="tab-content" style="display: none;">
+            <h2>Chatbot</h2>
+            <div class="chat-container">
+                {% if conversation %}
+                    <div class="chat-history">
+                        {% for msg in conversation %}
+                            <div class="chat-message {{ 'user' if msg.role == 'user' else 'assistant' }}">
+                                <strong>{{ msg.role.capitalize() }}:</strong> {{ msg.content }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <form method="POST" action="/chatbot-query">
+                <label for="chatbot_input">Ask a Question:</label>
+                <input type="text" id="chatbot_input" name="chatbot_input" placeholder="Type your message..." required>
+                <button type="submit">Send</button>
+            </form>
+        </section>
     </main>
 
-    <!-- Script to dynamically set the active tab -->
     <script>
         // Dynamically show the active tab based on the value passed from Flask
         window.onload = () => {
