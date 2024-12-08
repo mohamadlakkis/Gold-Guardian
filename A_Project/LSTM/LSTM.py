@@ -153,4 +153,4 @@ def run_model(data_file: str = 'data/data.csv'):
     plt.savefig("images/plots/predictions.png")
 
     FINAL_PREDICTION = predictions_original_scale[-1]
-    open("prediction.txt", "w").write(str(FINAL_PREDICTION))
+    open("prediction.log", "w").write(str(FINAL_PREDICTION))

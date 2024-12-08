@@ -12,9 +12,9 @@ def model_scheduler():
     run_model(data_file=path)
 
 
-@app.route('/prediction')
+@app.route('/prediction', methods=['GET'])
 def predict():
-    prediction = open("prediction.txt").read()
+    prediction = open("prediction.log").read()
     image = open("images/plots/predictions.png", "rb").read()
     return {"prediction": prediction, "image": image}, 200
 
