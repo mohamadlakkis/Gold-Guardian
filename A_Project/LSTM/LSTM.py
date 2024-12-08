@@ -32,7 +32,7 @@ def run_model(data_file: str = 'data/data.csv'):
             labels.append(label)
         return np.array(sequences), np.array(labels)
 
-    sequence_length = 120  # number of days to look back to predict the next day's open price (i.e. 60 days)
+    sequence_length = 120 # number of days to look back to predict the next day's open price (i.e. 120 days)
 
     X_train, y_train = create_sequences(train_set_scaled, sequence_length)
 
@@ -43,9 +43,9 @@ def run_model(data_file: str = 'data/data.csv'):
     print(f"X_train shape: {X_train_tensors.shape}")
     print(f"y_train shape: {y_train_tensors.shape}")
 
-    class BitcoinRNN(nn.Module):
+    class GoldLSTM(nn.Module):
         def __init__(self, input_size, hidden_size_LSTM, num_layers_LSTM, output_size=1):
-            super(BitcoinRNN, self).__init__()
+            super(GoldLSTM, self).__init__()
             # define my parameters
             self.input_size = input_size
             self.hidden_size_LSTM = hidden_size_LSTM
@@ -72,7 +72,7 @@ def run_model(data_file: str = 'data/data.csv'):
     output_size = 1  # 1 output neuron to predict the next day's open price
     batch_size = 32  # batch size
 
-    model = BitcoinRNN(input_size, hidden_size, num_layers, output_size)
+    model = GoldLSTM(input_size, hidden_size, num_layers, output_size)
 
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=0.0001)
@@ -150,7 +150,7 @@ def run_model(data_file: str = 'data/data.csv'):
     plt.xlabel('Time Steps')
     plt.ylabel('Price (Original Scale)')
     plt.legend()
-    plt.savefig("images/plots/predictions.png")
+    plt.savefig("images/plots/predictions_LSTM.png")
 
     FINAL_PREDICTION = predictions_original_scale[-1]
-    open("prediction.log", "w").write(str(FINAL_PREDICTION))
+    open("prediction_LSTM.log", "w").write(str(FINAL_PREDICTION))
