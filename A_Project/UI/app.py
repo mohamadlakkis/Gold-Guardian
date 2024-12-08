@@ -14,6 +14,7 @@ GENERATE_ANSWER_URL = "http://127.0.0.1:5001/generate-answer"
 IMAGE_PROMPT_URL = "http://127.0.0.1:5001/image-prompt"
 SENTIMENT_URL = "http://127.0.0.1:5002/sentiment"
 Q_AND_A_URL = "http://127.0.0.1:5003/answer"
+LSTM_URL = "http://127.0.0.1:5004/prediction"
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
