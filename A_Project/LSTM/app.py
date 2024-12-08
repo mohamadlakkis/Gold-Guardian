@@ -7,7 +7,7 @@ from LSTM import run_model
 app = Flask(__name__)
 
 
-def run_model():
+def model_scheduler():
     path = load_dataset(year=2000, ticker="GC=F")
     run_model(data_file=path)
 
@@ -21,6 +21,6 @@ def predict():
 
 if __name__ == "__main__":
     scheduler = APScheduler()
-    scheduler.add_job(func=run_model, trigger='cron', hour=2, minute=0, id='model_job')
+    scheduler.add_job(func=model_scheduler, trigger='cron', hour=2, minute=0, id='model_job')
     scheduler.start()
     app.run(host='0.0.0.0', port=5004)
