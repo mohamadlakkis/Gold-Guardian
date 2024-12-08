@@ -16,6 +16,8 @@
             <a href="#" class="nav-link" data-tab="sentiment-tab" onclick="showTab('sentiment-tab')">Sentiment</a>
             <!-- New Chatbot Tab -->
             <a href="#" class="nav-link" data-tab="chatbot-tab" onclick="showTab('chatbot-tab')">Chatbot</a>
+            <!-- New LSTM Tab -->
+            <a href="#" class="nav-link" data-tab="prediction-tab" onclick="showTab('prediction-tab')">Prediction</a>
         </nav>
     </header>
     <main class="container">
@@ -99,10 +101,36 @@
                 <button type="submit">Send</button>
             </form>
         </section>
+        <!-- LSTM Section: this is a GET -->
+            <!-- <section id="prediction-tab" class="tab-content" style="display: none;">
+                <h2>Prediction</h2>
+                <div class="prediction-container">
+                    {% if prediction_LSTM and image_LSTM %}
+                        <div class="prediction-output">
+                            <h3>Prediction:</h3>
+                            <p>{{ prediction_LSTM }}</p>
+                        </div>
+                        <div class="prediction-image">
+                            <h3>Prediction Graph:</h3>
+                            <img src="{{ image_LSTM }}" alt="Prediction Graph">
+                        </div>
+                    {% else %}
+                        <p>No prediction data available yet. Please click the button to fetch the prediction.</p>
+                    {% endif %}
+                </div>
+            </section> -->
+            <section id="prediction-tab" class="tab-content" style="display: none;" onload="fetchPrediction()">
+                <h2>Prediction</h2>
+                <div class="prediction-container" id="prediction-container">
+                    <p>Loading prediction...</p> <!-- Default message while fetching -->
+                </div>
+            </section>
+        
+
     </main>
 
     <script>
-        // Dynamically show the active tab based on the value passed from Flask
+                // Dynamically show the active tab based on the value passed from Flask
         window.onload = () => {
             const activeTab = "{{ active_tab }}"; // Flask variable
             if (activeTab) {
@@ -119,10 +147,31 @@
             // Remove active class from all nav links
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             // Show the selected tab
-            document.getElementById(tabId).style.display = 'block';
-            // Add active class to the selected nav link
+            const activeTab = document.getElementById(tabId);
+            activeTab.style.display = 'block';
             document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+
+            // Trigger prediction fetch if the prediction tab is shown
+            if (tabId === 'prediction-tab') {
+                fetchPrediction();
+            }
         }
+
+        // Function to fetch prediction content
+        function fetchPrediction() {
+            const predictionContainer = document.getElementById('prediction-container');
+            predictionContainer.innerHTML = '<p>Loading prediction...</p>';
+
+            fetch('/prediction')
+                .then(response => response.text())
+                .then(html => {
+                    predictionContainer.innerHTML = html; // Replace content dynamically
+                })
+                .catch(error => {
+                    predictionContainer.innerHTML = `<p>Error fetching prediction: ${error}</p>`;
+                });
+        }
+
     </script>
 </body>
 </html>

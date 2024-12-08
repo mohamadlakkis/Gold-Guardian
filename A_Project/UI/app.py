@@ -6,8 +6,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Added for session management
-
+app.secret_key = 'secret'
 # URLs for the backend services
 RAG_QUERY_URL = "http://127.0.0.1:5001/query"
 GENERATE_ANSWER_URL = "http://127.0.0.1:5001/generate-answer"
@@ -112,7 +111,9 @@ def text_prompt():
                     error="Prompt cannot be empty.",
                     prompt_image_user=session.get("prompt_image_user"),
                     answer_image=session.get("answer_image"),
-                    image_URL=session.get("image_URL")
+                    image_URL=session.get("image_URL"),
+                    prediction_LSTM=session.get("prediction_LSTM"),
+                    image_LSTM=session.get("image_LSTM")
                 )
 
             # Step 2: Call RAG Service
@@ -202,7 +203,9 @@ def sentiment():
                     answer_text=session.get("answer_text"),
                     prompt_image_user=session.get("prompt_image_user"),
                     answer_image=session.get("answer_image"),
-                    image_URL=session.get("image_URL")
+                    image_URL=session.get("image_URL"),
+                    prediction_LSTM=session.get("prediction_LSTM"),
+                    image_LSTM=session.get("image_LSTM")
                 )
 
             # Call Sentiment Analysis Service
@@ -220,7 +223,9 @@ def sentiment():
                     prompt_image_user=session.get("prompt_image_user"),
                     prompt_sentiment_user=session.get("prompt_sentiment_user"),
                     answer_image=session.get("answer_image"),
-                    image_URL=session.get("image_URL")
+                    image_URL=session.get("image_URL"),
+                    prediction_LSTM=session.get("prediction_LSTM"),
+                    image_LSTM=session.get("image_LSTM")
                 )
 
             sentiment_data = sentiment_response.json()
@@ -237,7 +242,9 @@ def sentiment():
                 prompt_image_user=session.get("prompt_image_user"),
                 # prompt_sentiment_user=session.get("prompt_sentiment_user"),
                 answer_image=session.get("answer_image"),
-                image_URL=session.get("image_URL")
+                image_URL=session.get("image_URL"),
+                prediction_LSTM=session.get("prediction_LSTM"),
+                image_LSTM=session.get("image_LSTM")
             )
 
         except Exception as e:
@@ -272,8 +279,8 @@ def chatbot_query():
                 answer_text=session.get("answer_text"),
                 prompt_image_user=session.get("prompt_image_user"),
                 answer_image=session.get("answer_image"),
-                image_URL=session.get("image_URL"),
-                prompt_sentiment_user=session.get("prompt_sentiment_user"),
+                prediction_LSTM=session.get("prediction_LSTM"),
+                image_LSTM=session.get("image_LSTM")
             )
 
         # Retrieve old_messages from session or initialize
@@ -298,8 +305,10 @@ def chatbot_query():
                 answer_text=session.get("answer_text"),
                 prompt_image_user=session.get("prompt_image_user"),
                 answer_image=session.get("answer_image"),
-                image_URL=session.get("image_URL"),
+                image_URL=session.get("image_URL"), 
                 prompt_sentiment_user=session.get("prompt_sentiment_user"),
+                prediction_LSTM=session.get("prediction_LSTM"),
+                image_LSTM=session.get("image_LSTM")
             )
 
         qa_data = qa_response.json()
@@ -320,7 +329,9 @@ def chatbot_query():
             prompt_image_user=session.get("prompt_image_user"),
             answer_image=session.get("answer_image"),
             image_URL=session.get("image_URL"),
-            prompt_sentiment_user=session.get("prompt_sentiment_user")
+            prompt_sentiment_user=session.get("prompt_sentiment_user"),
+            prediction_LSTM=session.get("prediction_LSTM"),
+            image_LSTM=session.get("image_LSTM")
         )
 
     except Exception as e:
@@ -334,10 +345,71 @@ def chatbot_query():
             prompt_image_user=session.get("prompt_image_user"),
             answer_image=session.get("answer_image"),
             image_URL=session.get("image_URL"),
-            prompt_sentiment_user=session.get("prompt_sentiment_user")
+            prompt_sentiment_user=session.get("prompt_sentiment_user"),
+            prediction_LSTM=session.get("prediction_LSTM"),
+            image_LSTM=session.get("image_LSTM")
         )
 
+# @app.route('/prediction', methods=['GET'])
+# def predict():
+#     '''
+#     Handles prediction each day and returns the prediction and image of the prediction. [based on 120 days before this day]
+#     '''
+#     session["active_tab"] = "prediction-tab"
+#     print("Prediction") 
+#     try:
+#         response = requests.get(LSTM_URL)
+#         print(response)
+#         if response.status_code != 200:
+#             return render_template(
+#                 'index.html',
+#                 error="Error fetching prediction from LSTM service.",
+#                 prompt_text_user=session.get("prompt_text_user"),
+#                 answer_text=session.get("answer_text"),
+#                 prompt_image_user=session.get("prompt_image_user"),
+#                 answer_image=session.get("answer_image"),
+#                 image_URL=session.get("image_URL"),
+#                 prompt_sentiment_user=session.get("prompt_sentiment_user"),
+#                 active_tab=session.get("active_tab", "prediction-tab")
+#             )
+#         prediction_LSTM = response.json()["prediction_LSTM"]
+        
+#         image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
 
+#         # Return only the HTML content for the prediction container
+#         return render_template(
+#             'prediction_content.html',
+#             prediction_LSTM=prediction_LSTM,
+#             image_LSTM=image_LSTM, 
+#             active_tab=session.get("active_tab", "prediction-tab")
+#         )
+#     except Exception as e:
+#         return f"<p>Error fetching prediction: {str(e)}</p>"
+
+
+@app.route('/prediction', methods=['GET'])
+def predict():
+    """
+    Handles prediction for the current day and returns the prediction and its visualization.
+    """
+    try:
+        # Make GET request to LSTM service
+        response = requests.get(LSTM_URL)
+        response.raise_for_status()  # Raise exception for non-200 status codes
+
+        # Extract prediction and image URL
+        prediction_LSTM = response.json().get("prediction_LSTM")
+        image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
+
+        # Return only the HTML content for the prediction container
+        return render_template(
+            'prediction_content.html',
+            prediction_LSTM=prediction_LSTM,
+            image_LSTM=image_LSTM
+        )
+    except Exception as e:
+        # Return error message to the client
+        return f"<p>Error fetching prediction: {str(e)}</p>"
 @app.route('/', methods=['GET', 'POST'])
 def home():
     active_tab = session.get("active_tab", "text-query-tab")  # Default to text-query-tab
@@ -354,7 +426,9 @@ def home():
         prompt_sentiment_user=session.get("prompt_sentiment_user"),
         answer_image=session.get("answer_image"),
         image_URL=session.get("image_URL"),
-        conversation=session.get("conversation", [])
+        conversation=session.get("conversation", []),
+        prediction_LSTM=session.get("prediction_LSTM"),
+        image_LSTM=session.get("image_LSTM")
     )
 
 
