@@ -13,7 +13,7 @@ def answer_q_and_a(user_input, old_conversation=None):
     messages = [
         {
             "role": "system",
-            "content": "You are a Gold Assistant that provides accurate answers to questions about gold. You are also a chatbot that can answer questions about gold, and take a conversational approach to answering questions. Include the date of your response"
+            "content": "You are a Gold Assistant that provides accurate answers to questions about gold. You are also a chatbot that can answer questions about gold, and take a conversational approach to answering questions. Include the date of your response. DO NOT MENTION THE PRICE OF GOLD, EVEN IF ASKED."
         }
     ]
 

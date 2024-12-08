@@ -88,8 +88,10 @@
                 {% if conversation %}
                     <div class="chat-history">
                         {% for msg in conversation %}
-                            <div class="chat-message {{ 'user' if msg.role == 'user' else 'assistant' }}">
+                            <div class="chat-message {{ 'user: ' if msg.role == 'user' else 'assistant: ' }}">
                                 <strong>{{ msg.role.capitalize() }}:</strong> {{ msg.content }}
+                                <br>
+                                <br>
                             </div>
                         {% endfor %}
                     </div>
@@ -102,23 +104,6 @@
             </form>
         </section>
         <!-- LSTM Section: this is a GET -->
-            <!-- <section id="prediction-tab" class="tab-content" style="display: none;">
-                <h2>Prediction</h2>
-                <div class="prediction-container">
-                    {% if prediction_LSTM and image_LSTM %}
-                        <div class="prediction-output">
-                            <h3>Prediction:</h3>
-                            <p>{{ prediction_LSTM }}</p>
-                        </div>
-                        <div class="prediction-image">
-                            <h3>Prediction Graph:</h3>
-                            <img src="{{ image_LSTM }}" alt="Prediction Graph">
-                        </div>
-                    {% else %}
-                        <p>No prediction data available yet. Please click the button to fetch the prediction.</p>
-                    {% endif %}
-                </div>
-            </section> -->
             <section id="prediction-tab" class="tab-content" style="display: none;" onload="fetchPrediction()">
                 <h2>Prediction</h2>
                 <div class="prediction-container" id="prediction-container">
