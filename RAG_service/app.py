@@ -7,7 +7,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
-from functions import RAGQueryHandler, extract_summary
+from functions import RAGQueryHandler, extract_summary, create_db
 
 
 def log(x):
@@ -20,7 +20,7 @@ CORS(app, resources={r"/*": {"origins": "http://ui-service:5001"}})
 
 # Initialize the RAG query handler
 rag_handler = RAGQueryHandler()
-RAG_QUERY_URL = "http://127.0.0.1:5004/query"
+RAG_QUERY_URL = "http://rag-service:5004/query"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
@@ -237,4 +237,6 @@ def health_check():
 
 
 if __name__ == "__main__":
+    if not os.path.exists("embeddings_documents.db/chroma.sqlite3"):
+        create_db()
     app.run(host="0.0.0.0", port=5004)

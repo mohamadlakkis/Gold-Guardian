@@ -137,7 +137,7 @@ def run_model(data_file: str = "data/data.csv"):
         dataset=train_dataset, batch_size=batch_size, shuffle=False
     )
 
-    num_epochs = 150
+    num_epochs = 100
     train_losses = []
 
     # Training loop
