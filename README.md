@@ -66,3 +66,5 @@ Note: If you wait for 2 a.m. time (System Time Zone) you will see the LSTM model
 
 - [Mohamad Lakkis](https://github.com/mohamadlakkis)
 - [Jad Shaker](https://github.com/jadshaker)
+
+For any questions or feedback, feel free to contact us via the [GitHub Issues Page](https://github.com/mohamadlakkis/gold-guardian/issues)
