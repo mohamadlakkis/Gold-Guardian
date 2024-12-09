@@ -47,7 +47,7 @@ To run the application, you need to run the docker images, you do so by running
 ```
 This command will take care of everything, from setting up the dependencies, installing the correct version of python(that is compatible with the project) on a docker image. 
 
-This command will take sometime since it will download the dependencies and the correct version of python. In addition to training the LSTM model (before deploying the service).
+This command will take sometime since it will download the dependencies(including pytorch which is large) and the correct version of python. In addition to training the LSTM model (before deploying the service).
 You can check out the progress of the training by inspecting the lstm.log file inside the LSTM directory.
 
 Then you can run the application by running
