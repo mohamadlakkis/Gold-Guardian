@@ -20,7 +20,13 @@ To generate this service we have used the RAG (Retrieval Augmented Generation) m
 
 This service is fine-tuned on sample news and predictions of gold prices. This model is responsible for predicting the gold price given some news.
 
+
 ## Installation
+
+### Requirements for installation 
+Docker Installed Only ! [Even python is NOT required]
+
+### Installation Steps
 
 To install the application, you need to clone the repository.
 
@@ -28,47 +34,32 @@ To install the application, you need to clone the repository.
 git clone https://github.com/mohamadlakkis/gold-guardian.git
 ```
 
-Then you need to setup the `.env` files in each directory. The `.env` file should contain OPENAPI_KEY and fine-tuned models.
+You will see a .env file in the parent directory, you just need to change the OPENAI_API_KEY="your-default-api-key" to your openai_key to be able to access it. 
 
-Finally, you need to build the docker images in each directory.
+Side note, inside the .env file you could actually try out different models and compare them to our Fine Tuned Models. Enjoy !
 
-For LSTM:
+### Building the Docker Images
+
+To run the application, you need to run the docker images, you do so by running
 
 ```bash
-cd LSTM
-docker build -t lstm-service .
+"sudo" docker compose build
 ```
+This command will take care of everything, from setting up the dependencies, installing the correct version of python(that is compatible with the project) on a docker image. 
 
-For Q_and_A:
+This command will take sometime since it will download the dependencies and the correct version of python. In addition to training the LSTM model (before deploying the service).
+You can check out the progress of the training by inspecting the lstm.log file inside the LSTM directory.
 
-```bash
-cd Q_and_A
-docker build -t q_and_a-service .
-```
-
-For RAG_service:
+Then you can run the application by running
 
 ```bash
-cd RAG_service
-docker build -t rag-service .
-```
-
-For sentiment_analysis:
-
-```bash
-cd sentiment_analysis
-docker build -t sentiment-analysis-service .
-```
-
-## Usage
-
-To run the application, you need to run the docker images.
-
-```bash
-docker compose up
+"sudo" docker compose up
 ```
 
 Then you can access the application on this [https://localhost:5001](http://localhost:5001).
+
+Note: If you wait for 2 a.m. time (System Time Zone) you will see the LSTM model being re-trained and the predictions being updated.
+
 
 ## Contributors
 
