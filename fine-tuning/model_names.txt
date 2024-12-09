@@ -1,8 +1,0 @@
-ft:gpt-4o-mini-2024-07-18:personal:sentiment-analysis:AaiuCkPu
-
-
-% V1.0
-ft:gpt-4o-mini-2024-07-18:personal:q-and-a:AajU3xoJ 
-
-% V2.0 (stopped at step 382, since after that we didn't see any importance in continuing the training, as the model was already stabilized) 21:39:18	382	0.7492(train)	-	1.5614(test)
-ft:gpt-4o-mini-2024-07-18:personal:question-answer-v3:AaodkYTJ:ckpt-step-382
