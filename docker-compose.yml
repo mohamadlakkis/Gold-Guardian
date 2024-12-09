@@ -1,0 +1,49 @@
+
+services:
+  master-service:
+    build:
+      context: .
+      dockerfile: MasterDockerfile
+    container_name: master-service
+    command: bash -c "docker compose build && docker compose up"
+    depends_on:
+      - lstm-service
+      - q-and-a-service
+      - rag-service
+      - sentiment-analysis-service
+      - ui-service
+
+  ui-service:
+    build:
+      context: ./UI
+      dockerfile: Dockerfile
+    ports:
+      - '5001:5001'
+
+  lstm-service:
+    build:
+      context: ./LSTM
+      dockerfile: Dockerfile
+    ports:
+      - '5002:5002'
+
+  q-and-a-service:
+    build:
+      context: ./Q_and_A
+      dockerfile: Dockerfile
+    ports:
+      - '5003:5003'
+
+  rag-service:
+    build:
+      context: ./RAG_service
+      dockerfile: Dockerfile
+    ports:
+      - '5004:5004'
+
+  sentiment-analysis-service:
+    build:
+      context: ./sentiment_analysis
+      dockerfile: Dockerfile
+    ports:
+      - '5005:5005'

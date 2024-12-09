@@ -8,20 +8,20 @@ FROM python:3.12-slim
 WORKDIR /app
 
 
-# Copy the application files into the container
-
-COPY . .
-
-
 # Upgrade pip to the latest version
 
 RUN pip install --upgrade pip
 
+# Copy only requirements.txt for dependency installation
+COPY requirements.txt .
 
 # Install the required Python dependencies
 
 RUN pip install -r requirements.txt
 
+
+# Copy the application files into the container
+COPY . .
 
 # Expose the port the Flask app runs on
 
@@ -35,4 +35,4 @@ ENV FLASK_ENV=production
 
 # Command to run the application
 
-CMD ["python", "app.py"]
+CMD ["sh", "-c", "echo Starting LSTM Flask app... && python app.py"]
