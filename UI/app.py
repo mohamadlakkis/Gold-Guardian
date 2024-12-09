@@ -376,6 +376,8 @@ def predict():
             f.write(image.content)
         image_LSTM = url_for("static", filename="images/predictions_LSTM.png")
 
+        # reformat prediction_LSTM: Now it looks like 1234.32434234324234 -> 1234.32 $
+        prediction_LSTM = f"{prediction_LSTM:.2f}$"
         # Return only the HTML content for the prediction container
         return render_template(
             "prediction_content.html",
