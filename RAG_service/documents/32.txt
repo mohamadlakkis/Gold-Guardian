@@ -1,0 +1,104 @@
+
+What Is the Gold Standard?
+By: Kristopher Kane
+Editor: Jordan Chussler
+Originally Published: Nov 12, 2024 
+
+The gold standard was a long-standing monetary system whose name became synonymous with the precious metal’s benchmark. Gold was — and is — a form of money, and though the gold standard linked currency valuations to gold, the precious metal maintains its value as a store of value over time, whereas currency does not.
+
+The gold standard has since been replaced, but what is the gold standard, and what do people mean when they refer to it?
+
+Keep reading for a look at the history of the gold standard, including its benefits and drawbacks, when it ended and what systems are now in place.
+
+The advantages of the gold standard
+
+In its heyday, the gold standard offered numerous advantages. It helped countries maintain stable currency values, which many felt improved predictability for businesses and provided greater economic security for consumers. Businesses were able to invest and expand more easily thanks to the stability the gold standard offered and the economic growth its dependability promoted.
+
+Keeping governments accountable by not allowing them to print currency at will is fiscally responsible, since printing new currency is a major contributing factor to inflation. To an extent, tying currency to the gold standard kept money printing practices in check by putting absolute limits on the supply of currency, as governments tied each coin or bill to a finite amount of gold. Without the ability to manipulate the money supply, nations couldn’t influence the value of their currencies as is done today by central banks in the absence of the gold standard. And because the gold standard was widely adopted, it standardized foreign exchange rates.
+The disadvantages of the gold standard
+
+For all its benefits, the gold standard often made it difficult for nations to effectively manage their economies. Having the gold standard in place limited governments' abilities to make strategic use of monetary policies, like restricting a nation’s ability to finance national defense.
+
+The gold standard also had the potential to cause deflation, as it required a country’s government to have large reserves of gold upon which its currency was based. For a country with insufficient gold reserves, an increased demand for paper currency might go unmet, as the government would be unable to back the creation of new currency. This typically leads to economic recession.
+The history of the gold standard
+
+The use of gold has a long and interesting history, from its first discovery by the Egyptians nearly 5,000 years ago to its current use in electronics, telecommunications and many other scientific and industrial applications. Though it has many practical uses, gold has always been prized for its natural beauty.
+In the beginning
+
+The use of gold as a form of currency dates back to antiquity. Gold was then, as it is now, valued for its rarity and its resistance to oxidation or tarnish, qualities that have made it highly sought after for use in the fine and decorative arts.
+
+Many ancient cultures used gold as currency in one form or another, and it has been amassed by the rulers of nations for centuries. Gold’s use as currency dates back to 550 B.C. under the rule of King Croesus of Lydia, an area that is now part of Turkey.
+At its peak
+
+The gold standard became more widespread in the 17th century with the expansion of global trade and increasing economic dominance of Western nations like England and the Netherlands. The gold standard was believed to provide financial stability and facilitate trade by allowing all gold standard currencies to be converted into gold at a fixed rate.
+
+However, this system had drawbacks, including restrictions on a government’s ability to manage its economy by printing or minting new currency to boost economic growth, since gold is a finite resource.
+Creating the bimetallic standard
+
+The bimetallic standard was a monetary system that tied currency to the value of both gold and silver, hence its name. Under the bimetallic standard, currency was freely convertible into fixed amounts of both gold and silver.
+
+The bimetallic standard appears in ancient historical accounts but was not widely adopted in the modern era until the 19th century. Its relatively recent adoption resulted from a desire to stabilize the value of currencies beyond just the backing of gold, and to stimulate economic activity and growth.
+
+Similar to the gold standard, the bimetallic standard had its drawbacks. Nations found it difficult to maintain a fixed exchange rate between gold and silver, which caused economic instability and volatility in commodities trading.
+
+There was a fixed exchange rate of gold to silver (15:1), with silver being more abundant than gold, and due to silver steadily losing value, gold was pushed out of circulation (known as Gresham’s Law). Another issue was demand: Today, silver is the second most consumed commodity in the world after crude oil. Roughly 80% of all silver ever mined has been consumed.
+
+The bimetallic standard came to an end around the turn of the 20th century with the discovery of large deposits of gold in South Africa and Australia. These discoveries led to a sharp increase in the global supply of gold, which caused further instability in the exchange rate between gold and silver and corresponding volatility in global financial markets.
+When the gold standard ended
+
+The gold standard was used by most major economies from the late 1800s until it was abandoned by many countries in the wake of the Great Depression. The Great Depression was a period of considerable deflation, and currency supplies limited by the gold standard were unable to counteract its effects. This made it difficult for both businesses and the individual consumer to pay debts as the value of currency plummeted.
+
+As a result, the U.S. abandoned the gold standard in 1933. Shortly thereafter, other nations followed suit. Since then, governments have been utilizing various monetary systems, like fiat currency, which isn’t backed by physical commodities like gold or silver.
+The gold standard comeback in the early 1900s
+
+Though gold was already being used in the 1880s to back currency, discoveries of significant amounts of gold — in South Africa, Australia and, to lesser extents, the western U.S. and the Yukon territory of Canada — brought renewed support for the system even as it affected the price of gold.
+
+As with all economic systems, leading economists of the day debated the use of the gold standard and cited the benefits of a fiat currency system with greater flexibility, like the dollar’s ability to be tied to commodities like oil. However, these historically-significant gold rushes weakened arguments against the gold standard.
+
+In 1900, President William McKinley signed the Gold Standard Act, which officially tied the value of the U.S. dollar to a specified quantity of gold. The U.S. had been using gold reserves to back its currency, but the Gold Standard Act delineated specifics and made it official policy.
+The Bretton Woods Agreement
+
+In 1944, 44 United Nations member states negotiated the Bretton Woods Agreement at the UN Monetary and Financial Conference in Bretton Woods, New Hampshire. Under this system, the value of the U.S. dollar was fixed to a specific quantity of gold, and in turn, other international currencies were pegged to the value of the dollar.
+
+This system worked well during the post-World War II economy, which was booming and established the U.S. as the largest economy in the world. But by the early 1970s, fuel crises, inflation and other socioeconomic factors caused the gold standard to become increasingly problematic. In 1971, the gold standard was officially abandoned by the U.S., marking the end of its run as the global de facto monetary system.
+
+Since that time, countries have used various monetary systems, the most common of which are fiat currency systems, which aren’t backed by any physical commodity. Though there are still ways to invest in gold, national currencies are no longer linked to the value of the precious metal.
+Gold standard vs. fiat money
+
+Gold standard currency and fiat currency are two different types of monetary systems. Systems based on the gold standard were used to tie a nation’s currency to the value of gold. In this system, governments, central banks or other monetary authorities guaranteed the exchange of a fixed amount of currency for a fixed amount of gold. This restricted the amount of currency in circulation by the quantity and value of gold held by the government or its banking system.
+
+On the other hand, with fiat currency systems, the value of a currency isn’t backed by a commodity like silver or gold but is instead guaranteed by the issuing government’s promise to honor the currency as a form of payment or "legal tender." The value of fiat currency is determined by supply and demand rather than the value of a commodity backing a currency, as was the case with the gold standard.
+
+Governments using a fiat system can increase the amount of available currency to stimulate economic activity, which works to curb inflation or address recessions. Conversely, this means the value of the currency can be directly affected by the economic factors they’re intended to prevent, like inflation and recessions.
+
+Even though national currencies are no longer backed by gold, investors have opportunities to buy the precious metal through various investments, like gold IRAs or gold ETFs, which act as a hedge against market volatility since the value of gold rarely decreases significantly.
+When did the U.S. leave the gold standard?
+
+The history of the gold standard in the U.S. is somewhat complicated, as the U.S. abandoned the gold standard twice. In 1933, President Franklin D. Roosevelt discarded the gold standard in response to its devaluation during the Great Depression and in an effort to boost economic activity. The gold standard was then readopted after World War II when the Bretton Woods Agreement again tied the U.S. dollar to the value of gold.
+
+However, 1971 saw the end of the gold standard in the U.S. when President Richard Nixon abandoned the monetary system as a response to widespread inflation, a ballooning trade deficit and the increasing cost of the Vietnam War. Foreign countries began to realize the U.S. didn’t have enough gold reserves to back the USD it printed to fund the Vietnam War. When countries began redeeming their dollars for gold, Nixon decoupled the currency from the precious metal.
+
+In essence, the U.S. left the gold standard so it would be able to print more currency and curb an economic downturn. In turn, this created greater opportunities for investors of foreign exchange and currency markets, as well as a renewed interest in buying physical gold as an investment.
+
+Despite the gold standard having been abandoned in the U.S. since 1971, if you’re wondering how to buy gold, there are numerous ways to invest in the precious metal.
+What countries are on the gold standard today?
+
+Currently, the gold standard isn’t used as the monetary system for any nation. The last country to abandon it was Switzerland, which severed ties between its currency and gold in 1999. Not coincidentally, Switzerland has the seventh largest gold reserve of all countries.
+What would happen if the U.S. readopted the gold standard?
+
+If the U.S. were to readopt the gold standard, it would require the government to guarantee that anyone would be able to exchange U.S. dollars for a fixed amount of gold. Not only would this system restrict the government’s ability to print money, but it would also cause the U.S. to immediately default on its loans.
+
+At the time of writing, the U.S. federal deficit is approaching $36 trillion. In comparison, the monetary value of all the gold that has ever been mined is estimated to be about $10.2 trillion.
+
+Summary of Money’s What Is the Gold Standard?
+
+The gold standard helped maintain stable currency values and limit inflation for countries with significant gold reserves. However, this was only the case during times of steady supply. Gold is a finite resource, but the discovery of significant gold deposits led to unpredictability in global financial markets.
+
+Countries that adopted the gold standard sometimes found it difficult to effectively manage their economies through monetary strategies that were anti-inflationary or economically incentivizing.
+
+The bimetallic standard, which tied currency to both gold and silver, was used at various times throughout history and had its own shortcomings and risks. Changes in the global precious metal supply caused instability between the values of the two metals, which led to a variety of economic issues, like the hoarding of precious metals by speculative investors.
+
+The gold standard was widely used throughout the ancient world and by modern governments from the mid-to-late 1800s. However, it wasn’t until significant gold rushes on three continents, a world war and a global depression that the gold standard was abandoned, first by the U.S. and then by most Western nations. Eventually, every country that had adopted the gold standard moved away from it.
+
+Though the post-war Bretton Woods system briefly tied the value of the U.S. dollar to a specific quantity of gold, economic inflexibility and limits on a government’s ability to adopt monetary strategies forced the U.S. to abandon the gold standard. Since 1971, the U.S. has used fiat currency as its monetary system. With currency that’s no longer backed by any physical commodity, the government can print as much money as needed to enact various measures to influence economic activity.
+

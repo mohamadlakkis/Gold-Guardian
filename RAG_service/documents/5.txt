@@ -1,0 +1,57 @@
+The landscape for wholesale gold trading is quite complex and constantly evolving. The three most important gold trading centres are the London OTC market, the US futures market and the Shanghai Gold Exchange (SGE). These markets comprise more than 90% of global trading volumes and are complemented by smaller secondary market centres around the world (both OTC and exchange-traded).
+Daily National gold volumes in US-dollar billions(Based on 2021 average daily volumes. For descriptions and methodologies for each data series please see: https://www.gold.org/goldhub/data/gold-trading-volumes): 
+1. Trend Analysis
+
+    The chart displays the daily notional gold trading volumes across various platforms, measured in US-dollar billions.
+    Loco London has the highest trading volume at 58.18 billion USD, significantly ahead of other exchanges.
+    COMEX follows as the second-largest platform with a daily volume of 41.93 billion USD.
+    The Shanghai Futures Exchange (SHFE) ranks third with a volume of 10.94 billion USD.
+    Lower trading volumes are observed in the Shanghai Gold Exchange (SGE) at 3.57 billion USD, Gold-backed ETFs at 2.39 billion USD, and Other gold futures exchanges at 1.81 billion USD.
+
+2. Key Metrics
+
+    Highest trading volume: Loco London (58.18 billion USD).
+    Lowest trading volume: Other gold futures exchanges (1.81 billion USD).
+    A notable drop is seen after the third-ranked SHFE (10.94 billion USD) to SGE (3.57 billion USD), suggesting a sharp decline in participation or liquidity beyond the top three platforms.
+
+3. Moving Averages
+
+    The chart does not explicitly indicate moving averages. If applicable to further analysis, trends could be deduced by calculating averages for clusters (e.g., top three platforms vs. the rest).
+
+4. Historical Comparisons
+
+    The chart specifies that these volumes are based on 2021 average daily volumes, but no direct comparison to past data is provided.
+    However, platforms like Loco London and COMEX consistently dominate gold trading historically, reaffirming their leadership in liquidity and trading activity.
+
+5. Market Indicators
+
+    Loco London and COMEX establish themselves as major liquidity centers, likely serving as critical indicators for global gold prices and market sentiment.
+    The significant gap between SHFE and SGE suggests that regional factors may heavily influence trading volume disparity.
+    Gold-backed ETFs reflect relatively lower volume (2.39 billion USD), which could indicate reduced direct retail participation compared to exchange-based trading.
+
+6. Future Projections
+
+    Continued dominance of Loco London and COMEX is expected due to their established roles in the global gold market.
+    Smaller platforms like SGE and gold-backed ETFs might see gradual growth if investor interest in alternative instruments or regional markets increases.
+    Regional exchanges like SHFE could leverage economic or policy changes to enhance their trading activity, narrowing the gap with global leaders.
+
+7. Investor Decision Support
+
+    Opportunities: Investors could leverage the liquidity and price efficiency offered by dominant platforms like Loco London and COMEX for large-scale transactions.
+    Warnings: Lower trading volumes on platforms like SGE and other gold futures exchanges could pose challenges in price discovery and execution efficiency.
+    Strategy Suggestion: Diversify trading across platforms to hedge regional and liquidity risks, with a preference for high-liquidity exchanges for significant transactions.
+
+The London OTC market
+
+The London OTC market has historically been the centre of the gold trade and today comprises approximately 70% of global notional trading volume per our estimates. The London market attracts participants from all around the world and sets the twice daily global reference benchmark for gold, the LBMA Gold Price. Uniquely the market in London trades 400 ounce bars ‘Good Delivery’ bars which are stored in the member vaults of the London Precious Metals Clearing Limited (LPMCL) and the Bank of England. London’s unique vaulting infrastructure with its strictly enforced chain of custody, as well as the sizeable stocks of gold that reside within it, contribute to London often being referred to as the ‘terminal market’. The London market also enjoys a time zone advantage, bridging Asian and US trading hours, and benefits from its status as a leading global financial services hub.
+
+Notwithstanding the London market’s pre-eminence, it has been losing relative share of global trading volumes. In 2015 banks operating in the market stopped submitting forward offered rates (GOFO rates) which were used to establish the market’s forward curve, one of several symptoms of a market that has become increasingly fragmented. The World Gold Council’s initiative to partner with a consortium of leading financial players and the London Metal Exchange to introduce LMEprecious is a direct response to these pressures. This suite of exchange-traded contracts seeks to modernise and introduce efficiencies to the heart of the gold trading market.
+The US futures market (COMEX)
+
+Despite London’s leading role in the physical market, the COMEX derivatives exchange operated by CME Group has become an increasingly important venue in driving price discovery. Trading activity on COMEX is primarily concentrated on the ‘active month’ (nearest dated) contract which acts as a proxy for the spot price. Only a small number of contracts physically settle into delivery of bars into COMEX vaults but the market is nonetheless tightly linked to physical markets through a very active Exchange for Physical (EFP) market. Notably, a steadily increasing share of COMEX volume is transacted during Asian market hours reflecting the exchange’s success of tapping into Asian market growth.
+The Chinese market (SGE & SHFE)
+
+The largest purely physical spot exchange in the world is the Shanghai Gold Exchange. Established in 2002 under close oversight of the People’s Bank of China, SGE has enjoyed a rapid rise to prominence that has mirrored China’s growing importance in the gold market. In 2016 SGE introduced the Shanghai Gold Price benchmark to cement China’s role as a price-setter, to help the internationalisation of the RMB and to broaden international participation in the Chinese market. It should be noted that SGE’s spot and deferred contracts are complemented by very active futures trading on the Shanghai Futures Market (SHFE), although the two exchanges are not directly linked.
+Secondary market centres
+
+Other important markets include Dubai, India, Japan, Singapore and Hong Kong. There are exchanges in all these markets offering a range of spot trading facilities or listed contracts but these have not attracted the liquidity seen on the market’s primary venues. Nonetheless, these markets play an important role to varying degrees in serving local demand or acting as regional trading hubs. For example, Hong Kong has long acted as a gateway to the Chinese market and Singapore is establishing itself as an important focal point for trading in the ASEAN region.

@@ -136,8 +136,7 @@ def num_tokens_from_string(string: str, encoding_name="cl100k_base") -> int:
 def create_db():
     client = chromadb.PersistentClient(path="embeddings_documents.db")
 
-    with open("new/api_key.txt", "r") as file:
-        openai.api_key = file.read().strip()
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
     openai_ef = embedding_functions.OpenAIEmbeddingFunction(
         model_name="text-embedding-3-large",
@@ -150,7 +149,7 @@ def create_db():
     )
 
     for i in range(1, 42):
-        file_name = f"new/documents/{i}.txt"
+        file_name = f"documents/{i}.txt"
         with open(file_name, "r", encoding="utf-8") as f:
             document_content = f.read()
         token_count = num_tokens_from_string(document_content)
