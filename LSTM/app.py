@@ -35,4 +35,4 @@ if __name__ == "__main__":
         func=model_scheduler, trigger="cron", hour=2, minute=0, id="model_job"
     )
     scheduler.start()
-    app.run(host="0.0.0.0", port=5004)
+    app.run(host="0.0.0.0", port=5002)

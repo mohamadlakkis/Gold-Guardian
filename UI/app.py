@@ -11,13 +11,14 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
+
 # URLs for the backend services
-RAG_QUERY_URL = "http://127.0.0.1:5001/query"
-GENERATE_ANSWER_URL = "http://127.0.0.1:5001/generate-answer"
-IMAGE_PROMPT_URL = "http://127.0.0.1:5001/image-prompt"
-SENTIMENT_URL = "http://127.0.0.1:5002/sentiment"
+LSTM_URL = "http://127.0.0.1:5002/prediction"
 Q_AND_A_URL = "http://127.0.0.1:5003/answer"
-LSTM_URL = "http://127.0.0.1:5004/prediction"
+RAG_QUERY_URL = "http://rag-service:5004/query"
+GENERATE_ANSWER_URL = "http://rag-service:5004/generate-answer"
+IMAGE_PROMPT_URL = "http://rag-service:5004/image-prompt"
+SENTIMENT_URL = "http://127.0.0.1:5005/sentiment"
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
