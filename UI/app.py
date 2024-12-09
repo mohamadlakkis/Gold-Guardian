@@ -18,12 +18,12 @@ app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 # URLs for the backend services
-LSTM_URL = "http://127.0.0.1:5002/prediction"
-Q_AND_A_URL = "http://127.0.0.1:5003/answer"
+LSTM_URL = "http://lstm-service:5002/prediction"
+Q_AND_A_URL = "http://q-and-a-service:5003/answer"
 RAG_QUERY_URL = "http://rag-service:5004/query"
 GENERATE_ANSWER_URL = "http://rag-service:5004/generate-answer"
 IMAGE_PROMPT_URL = "http://rag-service:5004/image-prompt"
-SENTIMENT_URL = "http://127.0.0.1:5005/sentiment"
+SENTIMENT_URL = "http://sentiment-analysis-service:5005/sentiment"
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -371,6 +371,10 @@ def predict():
         # Extract prediction and image URL
         prediction_LSTM = response.json().get("prediction_LSTM")
         image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
+        image = requests.get(image_LSTM)
+        with open("static/images/predictions_LSTM.png", "wb") as f:
+            f.write(image.content)
+        image_LSTM = url_for("static", filename="images/predictions_LSTM.png")
 
         # Return only the HTML content for the prediction container
         return render_template(

@@ -18,6 +18,7 @@ durationpy==0.9
 fastapi==0.115.6
 filelock==3.16.1
 Flask==3.1.0
+Flask-Cors==5.0.0
 flatbuffers==24.3.25
 fsspec==2024.10.0
 google-auth==2.36.0

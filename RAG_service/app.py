@@ -3,8 +3,8 @@ import os
 
 import openai
 import requests
-from functions import RAGQueryHandler, extract_summary
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 from functions import RAGQueryHandler, extract_summary
@@ -15,6 +15,8 @@ def log(x):
 
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "http://ui-service:5001"}})
 
 # Initialize the RAG query handler
 rag_handler = RAGQueryHandler()

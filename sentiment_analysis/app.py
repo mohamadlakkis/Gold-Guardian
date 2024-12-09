@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
+
 from functions import get_sentiment_analysis
 
 
@@ -7,6 +9,8 @@ def log(x):
 
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "http://ui-service:5001"}})
 
 
 @app.route("/sentiment", methods=["POST"])

@@ -2,6 +2,8 @@ import os
 
 from flask import Flask, jsonify
 from flask_apscheduler import APScheduler
+from flask_cors import CORS
+
 from functions import load_dataset, run_model
 
 
@@ -10,6 +12,8 @@ def log(x):
 
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "http://ui-service:5001"}})
 
 
 def model_scheduler():
