@@ -25,6 +25,7 @@ def model_scheduler():
 def predict():
     try:
         prediction = open("prediction_LSTM.log").read()
+        prediction = float(prediction)
         return {"prediction_LSTM": prediction}, 200
     except Exception as e:
         log(e)
