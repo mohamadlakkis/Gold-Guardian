@@ -366,18 +366,21 @@ def predict():
     try:
         # Make GET request to LSTM service
         response = requests.get(LSTM_URL)
-        response.raise_for_status()  # Raise exception for non-200 status codes
+        # response.raise_for_status()  # Raise exception for non-200 status codes
 
         # Extract prediction and image URL
         prediction_LSTM = response.json().get("prediction_LSTM")
+
+        # reformat prediction_LSTM: Now it looks like 1234.32434234324234 -> 1234.32 $
+        prediction_LSTM = f"{prediction_LSTM:.2f}$"
+
         image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
         image = requests.get(image_LSTM)
         with open("static/images/predictions_LSTM.png", "wb") as f:
             f.write(image.content)
-        image_LSTM = url_for("static", filename="images/predictions_LSTM.png")
 
-        # reformat prediction_LSTM: Now it looks like 1234.32434234324234 -> 1234.32 $
-        prediction_LSTM = f"{prediction_LSTM:.2f}$"
+        image_LSTM = "static/images/predictions_LSTM.png"
+
         # Return only the HTML content for the prediction container
         return render_template(
             "prediction_content.html",
@@ -415,4 +418,8 @@ def home():
 
 
 if __name__ == "__main__":
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+    if not os.path.exists("static/images"):
+        os.makedirs("static/images")
     app.run(host="0.0.0.0", port=5001)
