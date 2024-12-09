@@ -47,17 +47,18 @@ To run the application, you need to run the docker images, you do so by running
 ```
 This command will take care of everything, from setting up the dependencies, installing the correct version of python(that is compatible with the project) on a docker image. 
 
-This command will take sometime since it will download the dependencies(including pytorch which is large) and the correct version of python. In addition to training the LSTM model (before deploying the service).
-You can check out the progress of the training by inspecting the lstm.log file inside the LSTM directory.
+This command will take sometime since it will download the dependencies(including pytorch which is large) and the correct version of python.
+
 
 Then you can run the application by running
 
 ```bash
 "sudo" docker compose up
 ```
-
 Then you can access the application on this [https://localhost:5001](http://localhost:5001).
+Note: You can try all of the other services by going to their corresponding tabs on the application. Regarding the LSTM model, initially, it will automatically start the training, once you execute the compose up. It may take some time to train the mode, but in the mean time you can try out the other services.
 
+Note: You can check out the progress of the training by inspecting the lstm.log file inside the LSTM directory. 
 Note: If you wait for 2 a.m. time (System Time Zone) you will see the LSTM model being re-trained and the predictions being updated.
 
 
