@@ -237,6 +237,7 @@ def health_check():
 
 if __name__ == "__main__":
     if not os.path.exists("embeddings_documents.db/chroma.sqlite3"):
+        os.makedirs("embeddings_documents.db", exist_ok=True)
         create_db()
     rag_handler = RAGQueryHandler()
     app.run(host="0.0.0.0", port=5004)
