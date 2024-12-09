@@ -53,6 +53,8 @@ def extract_summary(image_data, text_data):
                                 Format the analysis as a list of points, ensuring clarity and relevance to investor decision-making and trend prediction.
                                 Note: Your sole goal, is to provide the best summary of a chart and convert it into a text, so other models that understands only text can understand the image.
                                 The user is interested in knowing {text_data} from the image. You are responsible for providing a good description of the image so that another model can use the text (i.e. the description of the image) to answer the user's query.
+
+                                If the image is not related to gold, return this exact message "-1".
                                 """
                         },
                         {
@@ -116,12 +118,13 @@ def image_query():
         rag_response.raise_for_status()
         documents = [doc["document"] for doc in rag_response.json().get("results", [])]
 
+        if summary_response.get("summary") == "-1":
+            return jsonify({"image_prompt": prompt, "documents": documents, "answer": "The image is not related to gold."}), 200
+
         # Step 5: Call GPT-4 for the final answer
         final_prompt = f"""
             Using the provided documents:
             {documents}
-
-            If the image is related to gold, answer the following question in a structured HTML format:
 
             Answer the following question in a structured HTML format:
             {prompt}
@@ -149,8 +152,6 @@ def image_query():
             - Do not include extraneous text such as "Based on the provided documents" or "Certainly."
             - Respond concisely and stick to the format above without deviation.
             -do not start your answer with ```html
-
-            If the image is not related to gold, provide an appropriate message.
         """
         # final_prompt = f"Using the following documents: {documents}. Answer this query: {prompt}, based on this image: {image_desc}"
 
