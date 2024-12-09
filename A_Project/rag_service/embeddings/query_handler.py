@@ -6,21 +6,19 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-openai.api_key = OPENAI_API_KEY
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+
 class RAGQueryHandler:
     def __init__(self):
         # Dynamically build the absolute path for the database file
         current_dir = os.path.dirname(os.path.abspath(__file__))  # Current file directory
         db_path = os.path.join(current_dir, "../embeddings_documents.db")  # Adjust relative to absolute
-        
+
         # Initialize ChromaDB and OpenAI
         self.client = chromadb.PersistentClient(path=db_path)
         self.collection = self.client.get_collection(name="documents_on_market_analysis")
-        
-        # Read OpenAI API key from environment variable
-        openai.api_key = os.getenv("OPENAI_API_KEY")
 
         if not openai.api_key:
             raise ValueError("OpenAI API key is missing. Please set it in the .env file.")

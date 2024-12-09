@@ -32,7 +32,7 @@ def run_model(data_file: str = 'data/data.csv'):
             labels.append(label)
         return np.array(sequences), np.array(labels)
 
-    sequence_length = 120 # number of days to look back to predict the next day's open price (i.e. 120 days)
+    sequence_length = 120  # number of days to look back to predict the next day's open price (i.e. 120 days)
 
     X_train, y_train = create_sequences(train_set_scaled, sequence_length)
 

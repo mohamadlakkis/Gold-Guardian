@@ -15,7 +15,6 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 
-
 def extract_summary(image_data, text_data):
     """
     Extracts summary from an image using OpenAI Vision and returns a structured response.
@@ -81,6 +80,7 @@ def extract_summary(image_data, text_data):
 
     except Exception as e:
         return {"success": False, "error": str(e)}
+
 
 @app.route('/image-prompt', methods=['POST'])
 def image_query():
@@ -160,12 +160,12 @@ def image_query():
             messages=[
                 {"role": "system", "content": "You will be answering a query on an image based on documents provided, and a description of the image if it is related to gold, if it is not show an appropriate message."},
                 {"role": "user", "content": final_prompt}
-            ], 
-            max_tokens = 3000,
-            temperature = 0,
-            top_p = 1,
-            frequency_penalty = 0,
-            presence_penalty = 0
+            ],
+            max_tokens=3000,
+            temperature=0,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
         )
         final_answer = gpt_response.choices[0].message.content
 
@@ -173,9 +173,6 @@ def image_query():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-    
-
 
 
 @app.route('/query', methods=['POST'])
@@ -200,6 +197,7 @@ def query():
         return jsonify(results), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 @app.route('/generate-answer', methods=['POST'])
 def generate_answer():
@@ -253,7 +251,6 @@ def generate_answer():
             -do not start your answer with ```html
         """
 
-
         # Call GPT-4o
         response = openai.chat.completions.create(
             model="gpt-4o",
@@ -274,6 +271,7 @@ def generate_answer():
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "RAG service is running"}), 200
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001)

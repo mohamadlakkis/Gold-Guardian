@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, session, url_for
 import requests
 import os
+from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 from datetime import datetime
 
+load_dotenv()
+
 
 app = Flask(__name__)
-app.secret_key = 'secret'
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
 # URLs for the backend services
 RAG_QUERY_URL = "http://127.0.0.1:5001/query"
 GENERATE_ANSWER_URL = "http://127.0.0.1:5001/generate-answer"
@@ -63,9 +66,6 @@ def image_RAG():
                     answer_text=session.get("answer_text")
                 )
             answer = image_response.json()["answer"]
-            # print(answer)
-            # Parse and format the model's response
-            # formatted_analysis = format_model_response(answer)
 
             # Store image query results in session
             session["prompt_image_user"] = prompt
@@ -305,7 +305,7 @@ def chatbot_query():
                 answer_text=session.get("answer_text"),
                 prompt_image_user=session.get("prompt_image_user"),
                 answer_image=session.get("answer_image"),
-                image_URL=session.get("image_URL"), 
+                image_URL=session.get("image_URL"),
                 prompt_sentiment_user=session.get("prompt_sentiment_user"),
                 prediction_LSTM=session.get("prediction_LSTM"),
                 image_LSTM=session.get("image_LSTM")
@@ -350,42 +350,6 @@ def chatbot_query():
             image_LSTM=session.get("image_LSTM")
         )
 
-# @app.route('/prediction', methods=['GET'])
-# def predict():
-#     '''
-#     Handles prediction each day and returns the prediction and image of the prediction. [based on 120 days before this day]
-#     '''
-#     session["active_tab"] = "prediction-tab"
-#     print("Prediction") 
-#     try:
-#         response = requests.get(LSTM_URL)
-#         print(response)
-#         if response.status_code != 200:
-#             return render_template(
-#                 'index.html',
-#                 error="Error fetching prediction from LSTM service.",
-#                 prompt_text_user=session.get("prompt_text_user"),
-#                 answer_text=session.get("answer_text"),
-#                 prompt_image_user=session.get("prompt_image_user"),
-#                 answer_image=session.get("answer_image"),
-#                 image_URL=session.get("image_URL"),
-#                 prompt_sentiment_user=session.get("prompt_sentiment_user"),
-#                 active_tab=session.get("active_tab", "prediction-tab")
-#             )
-#         prediction_LSTM = response.json()["prediction_LSTM"]
-        
-#         image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
-
-#         # Return only the HTML content for the prediction container
-#         return render_template(
-#             'prediction_content.html',
-#             prediction_LSTM=prediction_LSTM,
-#             image_LSTM=image_LSTM, 
-#             active_tab=session.get("active_tab", "prediction-tab")
-#         )
-#     except Exception as e:
-#         return f"<p>Error fetching prediction: {str(e)}</p>"
-
 
 @app.route('/prediction', methods=['GET'])
 def predict():
@@ -400,8 +364,7 @@ def predict():
         # Extract prediction and image URL
         prediction_LSTM = response.json().get("prediction_LSTM")
         image_LSTM = f"{LSTM_URL}/images/plots/predictions_LSTM.png"
-        # format prediction LSTM: 2683.6902765928244 to 2683.69 $ 
-        prediction_LSTM = f"{float(prediction_LSTM):.2f} $"
+
         # Return only the HTML content for the prediction container
         return render_template(
             'prediction_content.html',
@@ -411,6 +374,8 @@ def predict():
     except Exception as e:
         # Return error message to the client
         return f"<p>Error fetching prediction: {str(e)}</p>"
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     active_tab = session.get("active_tab", "text-query-tab")  # Default to text-query-tab

@@ -16,12 +16,12 @@ def predict():
     prediction = open("prediction_LSTM.log").read()
     return {"prediction_LSTM": prediction}, 200
 
+
 @app.route('/prediction/images/plots/predictions_LSTM.png', methods=['GET'])
 def get_image():
-    print("Image read")
-    open("images/plots/predictions_LSTM.png", "rb").read()
-    print("Image read")
     return open("images/plots/predictions_LSTM.png", "rb").read(), 200
+
+
 if __name__ == "__main__":
     if not os.path.exists("images/plots") or not os.path.exists("data"):
         if not os.path.exists("images/plots"):
