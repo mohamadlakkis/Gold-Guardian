@@ -19,11 +19,11 @@ os.system("cp .env sentiment_analysis/.env")
 os.system("cp .env UI/.env")
 
 # Run each service on its own to install and train all necessary models
-os.system("""cd LSTM && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
-os.system("""cd Q_and_A && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
-os.system("""cd RAG_service && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
-os.system("""cd sentiment_analysis && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
-os.system("""cd UI && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
+os.system("""cd LSTM && python3.12 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
+os.system("""cd Q_and_A && python3.12 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
+os.system("""cd RAG_service && python3.12 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
+os.system("""cd sentiment_analysis && python3.12 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
+os.system("""cd UI && python3.12 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && python3 app.py && deactivate && rm -rf .venv && cd ..""")
 
 # Build the docker images
 os.system("docker build -t lstm-service LSTM")
