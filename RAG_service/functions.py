@@ -1,11 +1,10 @@
-from dotenv import load_dotenv
-from chromadb.utils import embedding_functions
-import chromadb
 import os
 
+import chromadb
 import openai
 import requests
-
+from chromadb.utils import embedding_functions
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
@@ -22,12 +21,18 @@ class RAGQueryHandler:
 
         # Initialize ChromaDB and OpenAI
         self.client = chromadb.PersistentClient(path=db_path)
-        self.collection = self.client.get_collection(name="documents_on_market_analysis")
+        self.collection = self.client.get_collection(
+            name="documents_on_market_analysis"
+        )
 
         if not openai.api_key:
-            raise ValueError("OpenAI API key is missing. Please set it in the .env file.")
+            raise ValueError(
+                "OpenAI API key is missing. Please set it in the .env file."
+            )
 
-        self.embedding_function = embedding_functions.OpenAIEmbeddingFunction(model_name="text-embedding-3-large", dimensions=3072)
+        self.embedding_function = embedding_functions.OpenAIEmbeddingFunction(
+            model_name="text-embedding-3-large", dimensions=3072
+        )
 
     def query(self, query_text, top_k):
         # Generate query embedding

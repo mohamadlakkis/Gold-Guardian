@@ -7,12 +7,18 @@ from functions import RAGQueryHandler, extract_summary
 from flask import Flask, jsonify, request
 from werkzeug.utils import secure_filename
 
+from functions import RAGQueryHandler, extract_summary
+
+
+def log(x):
+    return open("app.log", "a").write(f"{x}\n")
+
 
 app = Flask(__name__)
 
 # Initialize the RAG query handler
 rag_handler = RAGQueryHandler()
-RAG_QUERY_URL = "http://127.0.0.1:5001/query"
+RAG_QUERY_URL = "http://127.0.0.1:5004/query"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
@@ -122,6 +128,7 @@ def image_query():
         )
 
     except Exception as e:
+        log(e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -146,6 +153,7 @@ def query():
         results = rag_handler.query(query_text, top_k)
         return jsonify(results), 200
     except Exception as e:
+        log(e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -217,6 +225,7 @@ def generate_answer():
         return jsonify({"answer": answer}), 200
 
     except Exception as e:
+        log(e)
         return jsonify({"error": str(e)}), 500
 
 

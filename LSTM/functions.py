@@ -1,14 +1,14 @@
-import yfinance as yf
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import yfinance as yf
 from sklearn.preprocessing import MinMaxScaler
 
 
-def print(x):
+def log(x):
     return open("lstm.log", "a").write(f"{x}\n")
 
 
@@ -49,7 +49,7 @@ def run_model(data_file: str = "data/data.csv"):
         sequences = []
         labels = []
         for i in range(len(data) - seq_length):
-            seq = data[i: i + seq_length]
+            seq = data[i : i + seq_length]
             label = data[
                 i + seq_length, 0
             ]  # choosing the 'open' price as the label we want to predict (i.e. the next day's open price)
@@ -65,8 +65,8 @@ def run_model(data_file: str = "data/data.csv"):
     X_train_tensors = torch.tensor(X_train, dtype=torch.float32)
     y_train_tensors = torch.tensor(y_train, dtype=torch.float32)
 
-    print(f"X_train shape: {X_train_tensors.shape}")
-    print(f"y_train shape: {y_train_tensors.shape}")
+    log(f"X_train shape: {X_train_tensors.shape}")
+    log(f"y_train shape: {y_train_tensors.shape}")
 
     class GoldLSTM(nn.Module):
         def __init__(
@@ -151,7 +151,9 @@ def run_model(data_file: str = "data/data.csv"):
 
             # Forward pass
             outputs = model(X_batch)
-            outputs = (outputs.squeeze())  # Remove unnecessary dimensions for comparison with y_batch
+            outputs = (
+                outputs.squeeze()
+            )  # Remove unnecessary dimensions for comparison with y_batch
 
             # Compute the loss
             loss = criterion(outputs, y_batch)
@@ -167,8 +169,8 @@ def run_model(data_file: str = "data/data.csv"):
         epoch_train_loss = running_train_loss / len(train_loader.dataset)
         train_losses.append(epoch_train_loss)
 
-        # Print progress
-        print(f"Epoch [{epoch+1}/{num_epochs}], Train Loss: {epoch_train_loss:.4f}")
+        # Log progress
+        log(f"Epoch [{epoch+1}/{num_epochs}], Train Loss: {epoch_train_loss:.4f}")
 
     # Show training loss curve
     plt.plot(train_losses, label="Training Loss")

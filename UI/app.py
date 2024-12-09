@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, url_for
 from werkzeug.utils import secure_filename
 
+
+def log(x):
+    return open("app.log", "a").write(f"{x}\n")
+
+
 load_dotenv()
 
 
@@ -87,6 +92,7 @@ def image_RAG():
                 answer_text=session.get("answer_text"),
             )
         except Exception as e:
+            log(e)
             return render_template(
                 "index.html",
                 error=f"An unexpected error occurred: {str(e)}",
@@ -178,6 +184,7 @@ def text_prompt():
             )
 
         except Exception as e:
+            log(e)
             # Handle unexpected errors
             return render_template(
                 "index.html",
@@ -247,6 +254,7 @@ def sentiment():
             )
 
         except Exception as e:
+            log(e)
             # Handle unexpected errors
             return render_template(
                 "index.html",
@@ -333,6 +341,7 @@ def chatbot_query():
         )
 
     except Exception as e:
+        log(e)
         return render_template(
             "index.html",
             error=f"An unexpected error occurred: {str(e)}",
@@ -370,6 +379,7 @@ def predict():
             image_LSTM=image_LSTM,
         )
     except Exception as e:
+        log(e)
         # Return error message to the client
         return f"<p>Error fetching prediction: {str(e)}</p>"
 
@@ -399,4 +409,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=5001)

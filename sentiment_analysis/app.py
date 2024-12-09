@@ -1,6 +1,11 @@
 from flask import Flask, jsonify, request
 from functions import get_sentiment_analysis
 
+
+def log(x):
+    return open("app.log", "a").write(f"{x}\n")
+
+
 app = Flask(__name__)
 
 
@@ -21,6 +26,7 @@ def sentiment():
 
             return jsonify({"sentiment": sentiment})
         except Exception as e:
+            log(e)
             return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 

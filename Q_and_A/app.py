@@ -1,6 +1,11 @@
 from flask import Flask, jsonify, request
 from functions import answer_q_and_a
 
+
+def log(x):
+    return open("app.log", "a").write(f"{x}\n")
+
+
 app = Flask(__name__)
 
 
@@ -23,7 +28,7 @@ def answer():
 
             return jsonify({"answer": answer})
         except Exception as e:
-            print(e)
+            log(e)
             return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 

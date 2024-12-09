@@ -1,8 +1,13 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_apscheduler import APScheduler
 from functions import load_dataset, run_model
+
+
+def log(x):
+    return open("app.log", "a").write(f"{x}\n")
+
 
 app = Flask(__name__)
 
@@ -14,13 +19,21 @@ def model_scheduler():
 
 @app.route("/prediction", methods=["GET"])
 def predict():
-    prediction = open("prediction_LSTM.log").read()
-    return {"prediction_LSTM": prediction}, 200
+    try:
+        prediction = open("prediction_LSTM.log").read()
+        return {"prediction_LSTM": prediction}, 200
+    except Exception as e:
+        log(e)
+        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 
 @app.route("/prediction/images/plots/predictions_LSTM.png", methods=["GET"])
 def get_image():
-    return open("images/plots/predictions_LSTM.png", "rb").read(), 200
+    try:
+        return open("images/plots/predictions_LSTM.png", "rb").read(), 200
+    except Exception as e:
+        log(e)
+        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 
 if __name__ == "__main__":
