@@ -24,7 +24,7 @@ This service is fine-tuned on sample news and predictions of gold prices. This m
 ## Installation
 
 ### Requirements for installation 
-Docker Installed Only ! [Even python is NOT required]
+Docker and Python3 installed on your machine.
 
 ### Installation Steps
 
@@ -34,39 +34,31 @@ To install the application, you need to clone the repository.
 git clone https://github.com/mohamadlakkis/gold-guardian.git
 ```
 
-You will see a .env file in the parent directory, you just need to change the OPENAI_API_KEY="your-default-api-key" to your openai_key to be able to access it. 
-
 Side note, inside the .env file you could actually try out different models and compare them to our Fine Tuned Models. Enjoy !
 
-### Building the Docker Images
+### Execution Steps
 
-To run the application, you need to run the docker images, you do so by running
-
-Tip: If your Wifi is slow, please make sure to change the Dockerfile inside each directory to use this command: 
-```bash
-RUN pip install --default-timeout=1000000 -r requirements.txt
-```
-Instead of the normal pip install command. This will make sure that the pip install command does not timeout.
-
-Once this step is done: 
-```bash
-"sudo" docker compose build
-```
-This command will take care of everything, from setting up the dependencies, installing the correct version of python(that is compatible with the project) on a docker image. 
-
-This command will take sometime since it will download the dependencies(including pytorch which is large) and the correct version of python.
-
-
-Then you can run the application by running
+To run the application: 
 
 ```bash
-"sudo" docker compose up
+cd gold-guardian
 ```
-Then you can access the application on this [https://localhost:5001](http://localhost:5001).
-Note: You can try all of the other services by going to their corresponding tabs on the application. Regarding the LSTM model, initially, it will automatically start the training, once you execute the compose up. It may take some time to train the mode, but in the mean time you can try out the other services.
 
-Note: You can check out the progress of the training by inspecting the lstm.log file inside the LSTM directory. 
-Note: If you wait for 2 a.m. time (System Time Zone) you will see the LSTM model being re-trained and the predictions being updated.
+After that
+
+```bash
+python3 run.py
+```
+This will start the application (it will prompt you to enter your openai API_KEY) and you can access it on [https://localhost:5001](http://localhost:5001).
+
+Note: Regarding the Rag-Service, you can augment the documents available in the documents folder in the RAG_service directory. Keep in mind you should do this before executing run.py.
+
+Note: Regarding the Rag-Service aswell, you need to give it some time to load the documents. (Even if you didn't augment them)
+
+Note: You can try all of the services by going to their corresponding tabs on the application. Regarding the LSTM model, initially, it will automatically start the training, once you execute run.py. It may take some time to train the model, but in the mean time you can try out the other services. (You can check out the progress of the training by inspecting the lstm.log)
+
+Note: 
+Note: If you wait(keep the application running) for 2 a.m. time (System Time Zone) you will see the LSTM model being re-trained and the predictions being updated.
 
 
 ## Contributors
