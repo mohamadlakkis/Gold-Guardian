@@ -2,7 +2,7 @@
 
 ## Description
 
-Gold Guardian is an application that is based on several services. These services are `LSTM`, `Q_and_A`, `RAG_service` and `sentiment_analysis`.
+Gold Guardian is an application that is based on several services. These services are `LSTM`, `Q_and_A`, `RAG_service` and `sentiment_analysis`. Check out the website [here](https://gold-guardian-272364055597.us-central1.run.app)!
 
 ### LSTM
 
