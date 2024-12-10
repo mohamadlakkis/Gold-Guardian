@@ -1,18 +1,5 @@
 
 services:
-  master-service:
-    build:
-      context: .
-      dockerfile: MasterDockerfile
-    container_name: master-service
-    command: bash -c "docker compose build && docker compose up"
-    depends_on:
-      - lstm-service
-      - q-and-a-service
-      - rag-service
-      - sentiment-analysis-service
-      - ui-service
-
   ui-service:
     build:
       context: ./UI

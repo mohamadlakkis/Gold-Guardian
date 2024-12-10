@@ -8,20 +8,11 @@ FROM python:3.12-slim
 WORKDIR /app
 
 
-# Copy the application files into the container
-
-COPY . .
-
-
-# Upgrade pip to the latest version
-
+# Copy the dependencies file and install
+COPY requirements.txt .
 RUN pip install --upgrade pip
-
-
-# Install the required Python dependencies
-
-RUN pip install -r requirements.txt
-
+RUN pip install --default-timeout=1000000 -r requirements.txt
+COPY . .
 
 # Expose the port the Flask app runs on
 

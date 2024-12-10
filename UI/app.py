@@ -5,7 +5,7 @@ import requests
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, url_for
 from werkzeug.utils import secure_filename
-
+from flask_cors import CORS
 
 def log(x):
     return open("app.log", "a").write(f"{x}\n")
@@ -16,7 +16,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
-
+CORS(app)
 # URLs for the backend services
 LSTM_URL = "http://lstm-service:5002/prediction"
 Q_AND_A_URL = "http://q-and-a-service:5003/answer"

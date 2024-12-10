@@ -8,17 +8,10 @@ FROM python:3.12-slim
 WORKDIR /app
 
 
-# Upgrade pip to the latest version
-
-RUN pip install --upgrade pip
-
-# Copy only requirements.txt for dependency installation
+# Copy the dependencies file and install
 COPY requirements.txt .
-
-# Install the required Python dependencies
-
-RUN pip install -r requirements.txt
-
+RUN pip install --upgrade pip
+RUN pip install --default-timeout=1000000 -r requirements.txt
 
 # Copy the application files into the container
 COPY . .
