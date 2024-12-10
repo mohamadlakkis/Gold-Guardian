@@ -20,7 +20,6 @@ To generate this service we have used the RAG (Retrieval Augmented Generation) m
 
 This service is fine-tuned on sample news and predictions of gold prices. This model is responsible for predicting the gold price given some news.
 
-
 ## Installation
 
 ### Requirements for installation 
@@ -51,15 +50,13 @@ python3 run.py
 ```
 This will start the application (it will prompt you to enter your openai API_KEY) and you can access it on [https://localhost:5001](http://localhost:5001).
 
-Note: Regarding the Rag-Service, you can augment the documents available in the documents folder in the RAG_service directory. Keep in mind you should do this before executing run.py.
+__Note:__ Regarding the Rag-Service, you can augment the documents available in the documents folder in the RAG_service directory. Keep in mind you should do this before executing run.py.
 
-Note: Regarding the Rag-Service aswell, you need to give it some time to load the documents. (Even if you didn't augment them)
+__Note:__ Regarding the Rag-Service as well, you need to give it some time to load the documents. (Even if you didn't augment them)
 
-Note: You can try all of the services by going to their corresponding tabs on the application. Regarding the LSTM model, initially, it will automatically start the training, once you execute run.py. It may take some time to train the model, but in the mean time you can try out the other services. (You can check out the progress of the training by inspecting the lstm.log)
+__Note:__ You can try all of the services by going to their corresponding tabs on the application. Regarding the LSTM model, initially, it will automatically start the training, once you execute run.py. It may take some time to train the model, but in the meantime you can try out the other services. (You can check out the progress of the training by inspecting the lstm.log)
 
-Note: 
-Note: If you wait(keep the application running) for 2 a.m. time (System Time Zone) you will see the LSTM model being re-trained and the predictions being updated.
-
+__Note:__ If you wait (keep the application running) for 2 a.m. time (System Time Zone) you will see the LSTM model being re-trained and the predictions being updated.
 
 ## Contributors
 
