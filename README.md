@@ -42,6 +42,13 @@ Side note, inside the .env file you could actually try out different models and 
 
 To run the application, you need to run the docker images, you do so by running
 
+Tip: If your Wifi is slow, please make sure to change the Dockerfile inside each directory to use this command: 
+```bash
+RUN pip install --default-timeout=1000000 -r requirements.txt
+```
+Instead of the normal pip install command. This will make sure that the pip install command does not timeout.
+
+Once this step is done: 
 ```bash
 "sudo" docker compose build
 ```
